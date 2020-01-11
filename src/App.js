@@ -1,24 +1,59 @@
 import React, {Component} from 'react'
-import TableView from './views/TableView';
-import MapView from './views/MapView';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import routes from './configs/routes';
+import layouts from './configs/layouts';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import { connect } from 'react-redux'
+
 import './index.css'
+import './styles.css'
 
 
 class App extends Component {
 
   render() {
+    
+    const {
+      layout
+    } = this.props
+    
     return (
       <Router>
-        <Switch>
-          <Route path="" component={TableView} />
-          {/* <Redirect exact={true} from='*' to='/table' /> */}
-
-        </Switch>
+        {layouts[layout || "layout1"](
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() => <Redirect to="/home" />}
+            />
+            {routes.map((route, i) => (
+              <Route
+                exact={route.exact}
+                key={i}
+                path={route.path}
+                render={props => (
+                  <route.component {...props} />
+                )}
+              />
+            ))}
+          </Switch>
+        )}
       </Router>
+      
     )
   }
 }
 
-export default App
+
+const mapStateToProps = (state, ownProps) => {
+  return { ...state.app }
+}
+
+export default connect(
+  mapStateToProps,
+  undefined
+)(App)
