@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
-import TableView from './views/TableView';
-import MapView from './views/MapView';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import { connect } from 'react-redux'
+import routes from './configs/routes';
+import layouts from './configs/layouts';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+
 import './index.css'
 
 
@@ -11,12 +16,27 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route path="" component={TableView} />
-          {/* <Redirect exact={true} from='*' to='/table' /> */}
-
-        </Switch>
+        {layouts["layout1"](
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() => <Redirect to="/home" />}
+            />
+            {routes.map((route, i) => (
+              <Route
+                exact={route.exact}
+                key={i}
+                path={route.path}
+                render={props => (
+                  <route.component {...props} />
+                )}
+              />
+            ))}
+          </Switch>
+        )}
       </Router>
+      
     )
   }
 }
