@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux'
 
 import './index.css'
+import './styles.css'
 
 
 class App extends Component {
@@ -49,7 +50,7 @@ class App extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  return { ...state }
+  return { ...state.app }
 }
 
 export default connect(

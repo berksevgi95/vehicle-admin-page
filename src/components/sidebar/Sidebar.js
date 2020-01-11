@@ -21,6 +21,10 @@ const styles = {
         borderLeft : 'none !important',
         borderBottom : 'none !important'
     },
+    pusher : {
+        height : '100% !important',
+        overflowY : 'auto !important'
+    },
     sidebarWidth : {
         width : '150px !important' 
     },
@@ -71,7 +75,7 @@ const Sidebar = ({
             visible={sidebar}
             width='thin'
         >
-            <Menu.Item onClick={handleCloseSidebar}>
+            <Menu.Item as="div" onClick={handleCloseSidebar}>
                 <Link to={"/"} >
                     <Image src='assets/icons/logo.png' />
                 </Link>
@@ -81,7 +85,7 @@ const Sidebar = ({
             {routes &&
                 routes.length > 0 &&
                 routes.map(route => route.icon && (
-                    <Menu.Item onClick={handleCloseSidebar}>
+                    <Menu.Item as="div" onClick={handleCloseSidebar}>
                         {route.icon}
                     </Menu.Item>
                 )
@@ -91,7 +95,10 @@ const Sidebar = ({
 
         <SemanticUISidebar.Pusher 
             dimmed={mobile && sidebar} 
-            className={!mobile && sidebar ? classes.fullWidth : classes.mobileFullWidth}
+            className={classNames(
+                classes.pusher,
+                !mobile && sidebar ? classes.fullWidth : classes.mobileFullWidth
+            )}
         >
             {children}
         </SemanticUISidebar.Pusher>
@@ -99,7 +106,7 @@ const Sidebar = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { ...state }
+    return { ...state.app }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

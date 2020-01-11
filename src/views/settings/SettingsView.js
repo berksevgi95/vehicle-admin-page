@@ -19,7 +19,7 @@ const SettingsView = ({
     changeLayout,
     ...props
 }) => {
-    return <Segment basic>
+    return <Segment basic className="view">
         <Header as='h3'>Application Content</Header>
         <Image src='/images/wireframe/paragraph.png' />
         <button onClick={() => {
@@ -33,7 +33,7 @@ const SettingsView = ({
 
 
 const mapStateToProps = (state, ownProps) => {
-    return { ...state }
+    return { ...state.app }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -3,7 +3,8 @@ import injectSheet from 'react-jss'
 
 const styles = {
     fullWidth :  {
-        width : '100% !important'
+        width : '100% !important',
+        height : '100% !important'
     },
 }
 

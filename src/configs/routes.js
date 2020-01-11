@@ -16,7 +16,7 @@ export default [{
         component: VehiclesView,
         exact : true,
         icon: <Link to={"/vehicles"} >
-            <Icon name='home' />
+            <Icon name='car' />
             Vehicles
         </Link>
     }, {
