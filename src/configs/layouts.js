@@ -6,19 +6,20 @@ import Container from '../components/container/Container'
 
 
 export default {
-    layout1 : (routes) => (
+    layout1: (routes) => (
         <div className="w-full h-full flex">
-            <Sidebar/>
-            <Container>
-                <Header />
-                {routes}
-            </Container>
+            <Sidebar>
+                <Container>
+                    <Header />
+                    {routes}
+                </Container>
+            </Sidebar>
         </div>
     ),
-    layout2 : (routes) => (
+    layout2: (routes) => (
         <div className="w-full h-full flex">
             <Container horizontal>
-                <Header horizontal/>
+                <Header horizontal />
                 {routes}
             </Container>
         </div>

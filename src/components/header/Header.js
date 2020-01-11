@@ -2,42 +2,47 @@ import React from 'react'
 import {
     Icon,
     Menu,
-    Dropdown
+    Dropdown,
+    Image
 } from 'semantic-ui-react'
+import * as AppActions from '../../store/app.actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import routes from '../../configs/routes';
 
 const Header = ({
     horizontal,
+    sidebar,
+    openSidebar,
+    closeSidebar,
     ...props
 }) => {
+
+    const handleClickMenuIcon = () => {
+        sidebar ? 
+            closeSidebar() : 
+            openSidebar()
+    }
+
     return horizontal ?
         <Menu stackable>
             <Menu.Item>
-                <img src='/logo.png' />
+                <Link to="/">
+                    <Image size={"mini"} src='assets/icons/logo.png' />
+                </Link>
             </Menu.Item>
 
-            <Menu.Item
-                name='features'
-                // active={activeItem === 'features'}
-            //   onClick={this.handleItemClick}
-            >
-                Features
-        </Menu.Item>
 
-            <Menu.Item
-                name='testimonials'
-                // active={activeItem === 'testimonials'}
-            //   onClick={this.handleItemClick}
-            >
-                Testimonials
-        </Menu.Item>
+            {routes &&
+                routes.length > 0 &&
+                routes.map(route => route.icon && (
+                    <Menu.Item>
+                        {route.icon}
+                    </Menu.Item>
+                )
+            )}
 
-            <Menu.Item
-                name='sign-in'
-                // active={activeItem === 'sign-in'}
-            //   onClick={this.handleItemClick}
-            >
-                Sign-in
-        </Menu.Item>
         </Menu> :
 
         <Menu attached='top' style={{
@@ -45,25 +50,9 @@ const Header = ({
             borderLeft: 'none',
             borderRight: 'none'
         }}>
-            <Dropdown item icon='wrench' simple>
-                <Dropdown.Menu>
-                    <Dropdown.Item>
-                        <Icon name='dropdown' />
-                        <span className='text'>New</span>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item>Document</Dropdown.Item>
-                            <Dropdown.Item>Image</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown.Item>
-                    <Dropdown.Item>Open</Dropdown.Item>
-                    <Dropdown.Item>Save...</Dropdown.Item>
-                    <Dropdown.Item>Edit Permissions</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Header>Export</Dropdown.Header>
-                    <Dropdown.Item>Share</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+            <Menu.Item onClick={handleClickMenuIcon}>
+                <Icon name="align justify"></Icon>
+            </Menu.Item>
 
             <Menu.Menu position='right'>
                 <div className='ui right aligned category search item'>
@@ -81,4 +70,19 @@ const Header = ({
         </Menu>
 }
 
-export default Header;
+
+const mapStateToProps = (state, ownProps) => {
+    return { ...state }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return bindActionCreators({
+        ...AppActions,
+    }, dispatch);
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header)
+

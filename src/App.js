@@ -7,6 +7,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import { connect } from 'react-redux'
 
 import './index.css'
 
@@ -14,9 +15,14 @@ import './index.css'
 class App extends Component {
 
   render() {
+    
+    const {
+      layout
+    } = this.props
+    
     return (
       <Router>
-        {layouts["layout1"](
+        {layouts[layout || "layout1"](
           <Switch>
             <Route
               path="/"
@@ -41,4 +47,12 @@ class App extends Component {
   }
 }
 
-export default App
+
+const mapStateToProps = (state, ownProps) => {
+  return { ...state }
+}
+
+export default connect(
+  mapStateToProps,
+  undefined
+)(App)
