@@ -2,29 +2,46 @@ import React from 'react'
 import {
     Header,
     Image,
+    Button,
     Segment,
     Table, 
+    Icon,
     Rating
 } from 'semantic-ui-react'
 import * as VehiclesActions from './store/vehicles.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import VehiclesViewForm from './VehiclesViewForm';
 
 const VehiclesView = ({
     vehicles,
     getVehicles,
+    resetVehicles,
+    history,
+    addVehicleDialog,
+    openVehicleForm,
     ...props
 }) => {
 
     React.useEffect(() => {
         getVehicles && getVehicles()
+
+        return resetVehicles
     }, [])
 
-    console.log(vehicles)
+    const handleNavigateDetail = () => {
+        history && history.push('vehicles/detail')
+    }
 
-    return <Segment basic className="view">
-        <Header as='h3'>Application Content</Header>
-        <Table celled padded>
+    return <Segment basic>
+        <div className="flex justify-between">
+            <Header as='h3'>Application Content</Header>
+            <Button onClick={openVehicleForm.bind(this, null)}>
+                <Icon name="add"></Icon>
+                Click Here
+            </Button>
+        </div>
+        <Table celled padded selectable>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell singleLine>id</Table.HeaderCell>
@@ -32,18 +49,17 @@ const VehiclesView = ({
                     <Table.HeaderCell>Model Name</Table.HeaderCell>
                     <Table.HeaderCell>req</Table.HeaderCell>
                     <Table.HeaderCell>req_alter</Table.HeaderCell>
+                    <Table.HeaderCell></Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
 
             <Table.Body>
                 {vehicles &&
-                    vehicles.length > 0 &&
+                    vehicles.size > 0 &&
                     vehicles.map(vehicle => (
-                        <Table.Row>
+                        <Table.Row onDoubleClick={handleNavigateDetail} key={vehicle.id}>
                             <Table.Cell>
-                                <Header as='h2' textAlign='center'>
-                                    {vehicle.id}
-                                </Header>
+                                {vehicle.id}
                             </Table.Cell>
                             <Table.Cell singleLine>
                                 {vehicle.brand}                            
@@ -57,30 +73,26 @@ const VehiclesView = ({
                             <Table.Cell>
                                 {vehicle.req_alter}
                             </Table.Cell>
+                            <Table.Cell textAlign="center">
+                                <Button 
+                                    size='mini' 
+                                    icon='edit' 
+                                    onClick={openVehicleForm.bind(this, vehicle)}
+                                />
+                                <Button 
+                                    size='mini' 
+                                    icon='delete' 
+                                />
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 
-                {/* <Table.Row>
-                    <Table.Cell>
-                        <Header as='h2' textAlign='center'>
-                            A
-                        </Header>
-                    </Table.Cell>
-                    <Table.Cell singleLine>Weight</Table.Cell>
-                    <Table.Cell>
-                        <Rating icon='star' defaultRating={3} maxRating={3} />
-                    </Table.Cell>
-                    <Table.Cell textAlign='right'>
-                        100% <br />
-                        <a href='#'>65 studies</a>
-                    </Table.Cell>
-                    <Table.Cell>
-                        Creatine is the reference compound for power improvement, with numbers
-                        from one meta-analysis to assess potency
-                    </Table.Cell>
-                </Table.Row> */}
             </Table.Body>
         </Table>
+        {addVehicleDialog &&
+            addVehicleDialog.open &&
+            <VehiclesViewForm/>
+        }
     </Segment>
 }
 
@@ -95,8 +107,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(VehiclesView)
-
+export default 
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(VehiclesView)
+    

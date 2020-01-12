@@ -8,18 +8,21 @@
     "react-scripts": "^3.0.0"
   },
   "dependencies": {
-    "formik": "^1.5.8",
-    "leaflet": "^1.5.1",
+    "formik": "2.1.1",
+    "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.14",
+    "ol": "4.6.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-jss": "^10.0.3",
     "react-notifications": "^1.4.3",
     "react-redux": "^7.0.2",
+    "react-responsive": "^8.0.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.87.3",
+    "socket.io": "^2.3.0",
     "tailwindcss": "^1.1.4"
   },
   "scripts": {

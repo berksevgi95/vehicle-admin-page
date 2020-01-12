@@ -58,11 +58,10 @@ const Header = ({
             borderTop: 'none',
             borderLeft: 'none',
             borderRight: 'none',
-            height : 65
         }}>
-            <Menu.Item onClick={handleClickMenuIcon}>
+            {/* <Menu.Item onClick={handleClickMenuIcon}>
                 <Icon name="align justify"></Icon>
-            </Menu.Item>
+            </Menu.Item> */}
 
             <Menu.Menu position='right'>
                 <div className='ui right aligned category search item'>
