@@ -11,7 +11,9 @@ export default {
             <Sidebar>
                 <Container>
                     <Header />
-                    {routes}
+                    <div className="view">
+                        {routes}
+                    </div>
                 </Container>
             </Sidebar>
         </div>
@@ -20,7 +22,12 @@ export default {
         <div className="w-full h-full flex">
             <Container horizontal>
                 <Header horizontal />
-                {routes}
+                <div className="view-horizontal">
+                    {routes}
+                </div>
+                {/* <div style={{height : 'calc(100% - 65px)'}}>
+
+                </div> */}
             </Container>
         </div>
     )

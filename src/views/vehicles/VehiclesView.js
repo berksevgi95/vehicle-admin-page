@@ -13,16 +13,22 @@ import { connect } from 'react-redux'
 const VehiclesView = ({
     vehicles,
     getVehicles,
+    resetVehicles,
+    history,
     ...props
 }) => {
 
     React.useEffect(() => {
         getVehicles && getVehicles()
+
+        return resetVehicles
     }, [])
 
-    console.log(vehicles)
+    const handleNavigateDetail = () => {
+        history && history.push('vehicles/detail')
+    }
 
-    return <Segment basic className="view">
+    return <Segment basic>
         <Header as='h3'>Application Content</Header>
         <Table celled padded>
             <Table.Header>
@@ -39,7 +45,7 @@ const VehiclesView = ({
                 {vehicles &&
                     vehicles.length > 0 &&
                     vehicles.map(vehicle => (
-                        <Table.Row>
+                        <Table.Row onDoubleClick={handleNavigateDetail} key={vehicle.id}>
                             <Table.Cell>
                                 <Header as='h2' textAlign='center'>
                                     {vehicle.id}
@@ -60,25 +66,6 @@ const VehiclesView = ({
                         </Table.Row>
                     ))}
                 
-                {/* <Table.Row>
-                    <Table.Cell>
-                        <Header as='h2' textAlign='center'>
-                            A
-                        </Header>
-                    </Table.Cell>
-                    <Table.Cell singleLine>Weight</Table.Cell>
-                    <Table.Cell>
-                        <Rating icon='star' defaultRating={3} maxRating={3} />
-                    </Table.Cell>
-                    <Table.Cell textAlign='right'>
-                        100% <br />
-                        <a href='#'>65 studies</a>
-                    </Table.Cell>
-                    <Table.Cell>
-                        Creatine is the reference compound for power improvement, with numbers
-                        from one meta-analysis to assess potency
-                    </Table.Cell>
-                </Table.Row> */}
             </Table.Body>
         </Table>
     </Segment>
@@ -95,8 +82,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(VehiclesView)
-
+export default 
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(VehiclesView)
+    

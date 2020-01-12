@@ -9896,6 +9896,18 @@ video {
   height: 100%;
 }
 
+.view {
+  height : calc(100% - 41px) !important;
+  margin : 0px !important;
+  overflow : auto !important;
+}
+
+.view-horizontal {
+  height : calc(100% - 65px) !important;
+  margin : 0px !important;
+  overflow : auto !important;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

@@ -12,6 +12,11 @@ const vehicles = (state = vehiclesState, action) => {
                 vehicles : action.payload
             }
         }
+        case VehiclesActions.RESET_VEHICLES : {
+            return {
+                ...vehiclesState
+            }
+        }
         default:
             return state
     }

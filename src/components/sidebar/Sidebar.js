@@ -9,64 +9,82 @@ import {
 } from 'semantic-ui-react'
 import injectSheet from 'react-jss'
 import { Link } from 'react-router-dom'
-import * as AppActions from '../../store/app.actions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
 import classNames from 'classnames'
 import routes from '../../configs/routes';
+import { useMediaQuery } from 'react-responsive'
 
 const styles = {
     sidebar : {
         borderTop : 'none !important',
         borderLeft : 'none !important',
-        borderBottom : 'none !important'
+        borderBottom : 'none !important',
+        width : '150px !important' 
     },
     pusher : {
         height : '100% !important',
         overflowY : 'auto !important'
-    },
-    sidebarWidth : {
-        width : '150px !important' 
     },
     fullWidth : {
         width : 'calc(100% - 150px) !important'
     },
     mobileFullWidth : {
         width : '100% !important'
+    },
+    iconButton : {
+        position: 'fixed', 
+        transition : '.5s', 
+        zIndex : 999, 
+        display : 'flex',
+        height : '40px !important',
+        width : '40px !important',
+        '&:hover' : {
+            cursor : 'pointer',
+        }
+    },
+    icon : {
+        fontSize : '20px !important',
+        margin : 'auto !important'
+    },
+    negative : {
+        color : 'white !important'
     }
 }
 
 const Sidebar = ({
     classes,
     children,
-    sidebar,
-    openSidebar,
-    closeSidebar,
     ...props
 }) => {
 
-    const [mobile, setMobile] = React.useState(false)
-
-    React.useState(() => {
-        if(window.innerWidth < 599) {
-            setMobile(true)
-            closeSidebar()
-        }
-        window.addEventListener('resize', () => {
-            setMobile(window.innerWidth < 599) 
-            window.innerWidth < 599 ? 
-                closeSidebar():
-                openSidebar()
-        })
-    }, [])
+    const [sidebar, setSidebar] = React.useState(true)
+    const mobile = useMediaQuery({ maxWidth: 599 })
 
     const handleCloseSidebar = () => {
-        mobile && closeSidebar()
+        mobile && setSidebar(false)
     }
 
+    const toggleSidebar = () => {
+        setSidebar(!sidebar)
+    }
+    
+    React.useState(() => {
+        handleCloseSidebar()
+    }, [])
+
     return <SemanticUISidebar.Pushable as={Segment} className="w-full">
+        
+        <div 
+            onClick={toggleSidebar} 
+            style={{left : sidebar ? 150 : 0}} 
+            className={classes.iconButton}
+        >
+            <Icon className={classNames(
+                classes.icon,
+                mobile && sidebar && classes.negative
+            )} name={sidebar ? 'outdent' : 'indent'}></Icon>
+        </div>
         <SemanticUISidebar
-            className={classNames(classes.sidebar, classes.sidebarWidth)}
+            className={classes.sidebar}
             as={Menu}
             animation={mobile ? "overlay" :"push"}
             direction={"left"}
@@ -77,7 +95,7 @@ const Sidebar = ({
         >
             <Menu.Item as="div" onClick={handleCloseSidebar}>
                 <Link to={"/"} >
-                    <Image src='assets/icons/logo.png' />
+                    <Image src='/assets/icons/logo.png' />
                 </Link>
                 
             </Menu.Item>
@@ -85,7 +103,7 @@ const Sidebar = ({
             {routes &&
                 routes.length > 0 &&
                 routes.map(route => route.icon && (
-                    <Menu.Item as="div" onClick={handleCloseSidebar}>
+                    <Menu.Item key={route.id} as="div" onClick={handleCloseSidebar}>
                         {route.icon}
                     </Menu.Item>
                 )
@@ -105,21 +123,9 @@ const Sidebar = ({
     </SemanticUISidebar.Pushable>
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return { ...state.app }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return bindActionCreators({
-        ...AppActions,
-    }, dispatch);
-}
 
 export default injectSheet(styles)(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(Sidebar)
+    Sidebar
 )
 
   
