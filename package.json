@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "formik": "2.1.1",
+    "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.14",
     "ol": "4.6.5",
     "react": "^16.8.6",

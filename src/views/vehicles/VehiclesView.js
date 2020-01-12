@@ -55,7 +55,7 @@ const VehiclesView = ({
 
             <Table.Body>
                 {vehicles &&
-                    vehicles.length > 0 &&
+                    vehicles.size > 0 &&
                     vehicles.map(vehicle => (
                         <Table.Row onDoubleClick={handleNavigateDetail} key={vehicle.id}>
                             <Table.Cell>
