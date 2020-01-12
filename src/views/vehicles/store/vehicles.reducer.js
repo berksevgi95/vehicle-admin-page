@@ -1,7 +1,11 @@
 import * as VehiclesActions from './vehicles.actions'
 
 const vehiclesState = {
-    vehicles : []
+    vehicles : [],
+    addVehicleDialog : {
+        open : false,
+        data : null
+    }
 }
 
 const vehicles = (state = vehiclesState, action) => {
@@ -15,6 +19,24 @@ const vehicles = (state = vehiclesState, action) => {
         case VehiclesActions.RESET_VEHICLES : {
             return {
                 ...vehiclesState
+            }
+        }
+        case VehiclesActions.OPEN_VEHICLE_FORM : {
+            return {
+                ...state,
+                addVehicleDialog : {
+                    open : true,
+                    data : action.payload
+                }
+            }
+        }
+        case VehiclesActions.CLOSE_VEHICLE_FORM : {
+            return {
+                ...state,
+                addVehicleDialog : {
+                    open : false,
+                    data : null
+                }
             }
         }
         default:

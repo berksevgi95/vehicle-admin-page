@@ -2,19 +2,24 @@ import React from 'react'
 import {
     Header,
     Image,
+    Button,
     Segment,
     Table, 
+    Icon,
     Rating
 } from 'semantic-ui-react'
 import * as VehiclesActions from './store/vehicles.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import VehiclesViewForm from './VehiclesViewForm';
 
 const VehiclesView = ({
     vehicles,
     getVehicles,
     resetVehicles,
     history,
+    addVehicleDialog,
+    openVehicleForm,
     ...props
 }) => {
 
@@ -29,8 +34,14 @@ const VehiclesView = ({
     }
 
     return <Segment basic>
-        <Header as='h3'>Application Content</Header>
-        <Table celled padded>
+        <div className="flex justify-between">
+            <Header as='h3'>Application Content</Header>
+            <Button onClick={openVehicleForm.bind(this, null)}>
+                <Icon name="add"></Icon>
+                Click Here
+            </Button>
+        </div>
+        <Table celled padded selectable>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell singleLine>id</Table.HeaderCell>
@@ -38,6 +49,7 @@ const VehiclesView = ({
                     <Table.HeaderCell>Model Name</Table.HeaderCell>
                     <Table.HeaderCell>req</Table.HeaderCell>
                     <Table.HeaderCell>req_alter</Table.HeaderCell>
+                    <Table.HeaderCell></Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
 
@@ -47,9 +59,7 @@ const VehiclesView = ({
                     vehicles.map(vehicle => (
                         <Table.Row onDoubleClick={handleNavigateDetail} key={vehicle.id}>
                             <Table.Cell>
-                                <Header as='h2' textAlign='center'>
-                                    {vehicle.id}
-                                </Header>
+                                {vehicle.id}
                             </Table.Cell>
                             <Table.Cell singleLine>
                                 {vehicle.brand}                            
@@ -63,11 +73,26 @@ const VehiclesView = ({
                             <Table.Cell>
                                 {vehicle.req_alter}
                             </Table.Cell>
+                            <Table.Cell textAlign="center">
+                                <Button 
+                                    size='mini' 
+                                    icon='edit' 
+                                    onClick={openVehicleForm.bind(this, vehicle)}
+                                />
+                                <Button 
+                                    size='mini' 
+                                    icon='delete' 
+                                />
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 
             </Table.Body>
         </Table>
+        {addVehicleDialog &&
+            addVehicleDialog.open &&
+            <VehiclesViewForm/>
+        }
     </Segment>
 }
 

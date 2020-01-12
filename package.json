@@ -8,7 +8,7 @@
     "react-scripts": "^3.0.0"
   },
   "dependencies": {
-    "formik": "^1.5.8",
+    "formik": "2.1.1",
     "lodash": "^4.17.14",
     "ol": "4.6.5",
     "react": "^16.8.6",
