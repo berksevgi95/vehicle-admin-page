@@ -6,12 +6,14 @@ import {
     Segment,
     Table, 
     Icon,
-    Rating
+    Menu,
+    Sidebar,
 } from 'semantic-ui-react'
 import * as VehiclesActions from './store/vehicles.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import VehiclesViewForm from './VehiclesViewForm';
+import VehiclesViewFilterForm from './VehiclesViewFilterForm';
 
 const VehiclesView = ({
     vehicles,
@@ -20,6 +22,9 @@ const VehiclesView = ({
     history,
     addVehicleDialog,
     openVehicleForm,
+
+    vehicleFilterbar,
+    openVehicleFilterbar,
     ...props
 }) => {
 
@@ -36,10 +41,14 @@ const VehiclesView = ({
     return <Segment basic>
         <div className="flex justify-between">
             <Header as='h3'>Application Content</Header>
-            <Button onClick={openVehicleForm.bind(this, null)}>
-                <Icon name="add"></Icon>
-                Click Here
-            </Button>
+            <div className="flex">
+                <Button compact onClick={openVehicleForm.bind(this, null)}>
+                    <Icon name="add"></Icon>
+                    Add Vehicle
+                </Button>
+                <Button compact onClick={getVehicles} icon="refresh"/>
+                <Button compact onClick={openVehicleFilterbar} icon="filter"/>
+            </div>
         </div>
         <Table celled padded selectable>
             <Table.Header>
@@ -89,6 +98,12 @@ const VehiclesView = ({
                 
             </Table.Body>
         </Table>
+
+        {vehicleFilterbar &&
+            vehicleFilterbar.open &&
+            <VehiclesViewFilterForm/>
+        }
+        
         {addVehicleDialog &&
             addVehicleDialog.open &&
             <VehiclesViewForm/>

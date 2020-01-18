@@ -8,9 +8,11 @@ import {
   Redirect
 } from "react-router-dom";
 import { connect } from 'react-redux'
+import { NotificationContainer } from 'react-notifications';
 
 import './index.css'
 import './styles.css'
+import 'react-notifications/lib/notifications.css';
 
 
 class App extends Component {
@@ -23,6 +25,7 @@ class App extends Component {
     
     return (
       <Router>
+        <NotificationContainer/>
         {layouts[layout || "layout1"](
           <Switch>
             <Route
