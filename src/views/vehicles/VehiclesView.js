@@ -76,7 +76,7 @@ const VehiclesView = ({
                     <Button compact disabled={selected.size === 0} icon="trash alternate"/>
                 </React.Fragment> : 
                 <React.Fragment>
-                    <Button compact onClick={openVehicleForm.bind(this, null)}>
+                    <Button id="add-vehicle-dialog-button" compact onClick={openVehicleForm.bind(this, null)}>
                         <Icon name="add"></Icon>
                         Add Vehicle
                     </Button>
@@ -155,6 +155,24 @@ const VehiclesView = ({
                     ))}
                 
             </Table.Body>
+            <Table.Footer>
+                <Table.Row>
+                    <Table.HeaderCell colSpan='6'>
+                        <Menu floated='right' pagination>
+                            <Menu.Item as='a' icon>
+                                <Icon name='chevron left' />
+                            </Menu.Item>
+                            <Menu.Item as='a'>1</Menu.Item>
+                            <Menu.Item as='a'>2</Menu.Item>
+                            <Menu.Item as='a'>3</Menu.Item>
+                            <Menu.Item as='a'>4</Menu.Item>
+                            <Menu.Item as='a' icon>
+                                <Icon name='chevron right' />
+                            </Menu.Item>
+                        </Menu>
+                    </Table.HeaderCell>
+                </Table.Row>
+            </Table.Footer>
         </Table>
 
         {vehicleFilterbar &&

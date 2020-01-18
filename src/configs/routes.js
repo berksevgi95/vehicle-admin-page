@@ -7,6 +7,8 @@ import HomeView from "../views/home/HomeView";
 import VehiclesView from "../views/vehicles/VehiclesView";
 import VehiclesDetailView from "../views/vehicles/detail/VehiclesDetailView";
 import SettingsView from "../views/settings/SettingsView";
+import SearchView from '../views/search/SearchView';
+import SearchDetailView from '../views/search/detail/SearchDetailView';
 
 export default [{
         id : 1,
@@ -33,5 +35,14 @@ export default [{
             <Icon name='settings' />
             Settings
         </Link>
+    }, {
+        id : 5,
+        path: "/search",
+        exact : true,
+        component: SearchView
+    }, {
+        id : 6,
+        path: "/search/:searchText",
+        component: SearchDetailView
     }
 ];
