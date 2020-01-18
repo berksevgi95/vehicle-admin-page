@@ -6,12 +6,22 @@ const vehiclesState = {
     addVehicleDialog : {
         open : false,
         data : null
+    },
+    vehicleFilterbar : {
+        open : false,
+        data : null
     }
 }
 
 const vehicles = (state = vehiclesState, action) => {
     switch (action.type) {
         case VehiclesActions.GET_VEHICLES : {
+            return {
+                ...state,
+                vehicles : List(action.payload)
+            }
+        }
+        case VehiclesActions.POST_VEHICLE : {
             return {
                 ...state,
                 vehicles : List(action.payload)
@@ -37,6 +47,24 @@ const vehicles = (state = vehiclesState, action) => {
                 addVehicleDialog : {
                     open : false,
                     data : null
+                }
+            }
+        }
+        case VehiclesActions.OPEN_VEHICLE_FILTERBAR : {
+            return {
+                ...state,
+                vehicleFilterbar : {
+                    ...state.vehicleFilterbar,
+                    open : true,
+                }
+            }
+        }
+        case VehiclesActions.CLOSE_VEHICLE_FILTERBAR : {
+            return {
+                ...state,
+                vehicleFilterbar : {
+                    ...state.vehicleFilterbar,
+                    open : false,
                 }
             }
         }

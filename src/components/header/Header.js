@@ -8,15 +8,21 @@ import {
 import * as AppActions from '../../store/app.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import routes from '../../configs/routes';
 import injectSheet from 'react-jss'
+import { DebounceInput } from 'react-debounce-input';
 
 const styles = {
     header :  {
         margin : '0px !important',
         height : '65px !important'
     },
+    horizontalHeader : {
+        borderTop: 'none !important',
+        borderLeft: 'none !important',
+        borderRight: 'none !important',
+    }
 }
 
 
@@ -26,13 +32,12 @@ const Header = ({
     sidebar,
     openSidebar,
     closeSidebar,
+    history,
     ...props
 }) => {
 
-    const handleClickMenuIcon = () => {
-        sidebar ? 
-            closeSidebar() : 
-            openSidebar()
+    const handleNavigateSearch = (e) => {
+        history.push(`/search/${e.target.value || ""}`)
     }
 
     return horizontal ?
@@ -52,26 +57,33 @@ const Header = ({
                 )
             )}
 
+            <div className='ui right aligned category search item'>
+                <div className='ui transparent icon input'>
+                    <DebounceInput
+                        minLength={2}
+                        placeholder={"Search"}
+                        debounceTimeout={500}
+                        onChange={handleNavigateSearch}
+                    />
+
+                    <i className='search link icon' onClick={handleNavigateSearch} />
+                </div>
+                <div className='results' />
+            </div>
         </Menu> :
 
-        <Menu attached='top' style={{
-            borderTop: 'none',
-            borderLeft: 'none',
-            borderRight: 'none',
-        }}>
-            {/* <Menu.Item onClick={handleClickMenuIcon}>
-                <Icon name="align justify"></Icon>
-            </Menu.Item> */}
-
+        <Menu attached='top' className={classes.horizontalHeader}>
             <Menu.Menu position='right'>
                 <div className='ui right aligned category search item'>
                     <div className='ui transparent icon input'>
-                        <input
-                            className='prompt'
-                            type='text'
-                            placeholder='Search animals...'
+                        <DebounceInput
+                            minLength={2}
+                            placeholder={"Search"}
+                            debounceTimeout={500}
+                            onChange={handleNavigateSearch} 
                         />
-                        <i className='search link icon' />
+
+                        <i className='search link icon' onClick={handleNavigateSearch}/>
                     </div>
                     <div className='results' />
                 </div>
@@ -91,8 +103,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 export default injectSheet(styles)(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(Header)
+    withRouter(
+        connect(
+            mapStateToProps,
+            mapDispatchToProps
+        )(Header)
+    )
 )

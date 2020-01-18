@@ -2,7 +2,6 @@ import React from 'react'
 import { 
     Button, 
     Modal, 
-    Checkbox, 
     Form, 
     Input
 } from 'semantic-ui-react'
@@ -15,6 +14,7 @@ import { useFormik } from 'formik';
 
 const VehiclesViewForm = ({
     children,
+    postVehicle,
     addVehicleDialog,
     closeVehicleForm,
     ...props
@@ -28,8 +28,10 @@ const VehiclesViewForm = ({
             req_alter: '',
         },
         onSubmit: values => {
-            console.log(values)
-            formik.resetForm()
+            postVehicle(values).then(() => {
+                formik.resetForm()
+                closeVehicleForm()
+            })
         },
         validate: ({
             brand,
