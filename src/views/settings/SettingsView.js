@@ -30,10 +30,10 @@ const SettingsView = ({
             }]} />
         </Segment>
         
-        <Segment id="language">
+        {/* <Segment id="language">
             <Header as='h6'>Language</Header>
 
-        </Segment>
+        </Segment> */}
         
     </Segment>
 }
