@@ -71,26 +71,27 @@ const AccidentsDetailView = ({
             modelName: '',
             req: '',
             req_alter: '',
+            files : []
         },
         onSubmit: values => {
-            postAccident(values).then(() => {
+            console.log(values)
+            // postAccident(values).then(() => {
                 
-            })
+            // })
         },
         validate: ({
             brand,
             modelName,
             req,
-            req_alter
+            req_alter,
+            files,
         }) => {
-            const errors = {};
-            if (!req) {
-                errors.req = 'Required';
-            } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(req)
-            ) {
-                errors.req = 'Invalid email address';
+            const errors = {}
+
+            if(!files || files.length === 0){
+                errors.files = 'Empty files'
             }
+
             return errors;
         }
     });
@@ -115,7 +116,9 @@ const AccidentsDetailView = ({
                     <FileInput
                         id="files"
                         name="files"
-                        onChange={formik.handleChange}
+                        multiple
+                        error={formik.errors.files}
+                        formikRef={formik}
                         value={formik.values.files}
                     />
                 </Form.Field>
