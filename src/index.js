@@ -12,13 +12,15 @@ import thunk from 'redux-thunk'
 
 import app from './store/app.reducer'
 import vehicles from './views/vehicles/store/vehicles.reducer'
+import accidents from './views/accidents/store/accidents.reducer'
 
 const composer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   combineReducers({
     app,
-    vehicles
+    vehicles,
+    accidents
   }),
   composer(
     applyMiddleware(thunk),

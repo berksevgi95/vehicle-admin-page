@@ -9,6 +9,8 @@ import VehiclesDetailView from "../views/vehicles/detail/VehiclesDetailView";
 import SettingsView from "../views/settings/SettingsView";
 import SearchView from '../views/search/SearchView';
 import SearchDetailView from '../views/search/detail/SearchDetailView';
+import AccidentsView from '../views/accidents/AccidentsView';
+import AccidentsDetailView from '../views/accidents/detail/AccidentsDetailView';
 
 export default [{
         id : 1,
@@ -44,5 +46,18 @@ export default [{
         id : 6,
         path: "/search/:searchText",
         component: SearchDetailView
+    }, {
+        id : 7,
+        exact : true,
+        path: "/accidents",
+        component: AccidentsView,
+        icon: <Link to={"/accidents"} >
+            <Icon name='unlink' />
+            Accidents
+        </Link>
+    }, {
+        id : 8,
+        path: "/accidents/:id",
+        component: AccidentsDetailView,
     }
 ];
