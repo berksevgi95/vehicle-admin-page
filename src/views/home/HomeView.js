@@ -17,6 +17,7 @@ import {
     Radar
 } from '../../components/graph'
 import injectSheet from 'react-jss'
+import color from '../../utils/color'
 
 const styles = {
     container : {
@@ -34,6 +35,29 @@ const HomeView = ({
     ...props
 }) => {
     
+    const colors = (steps, transparent) => color({
+        specs: {
+            steps,
+            hue_start: 150,
+            hue_end: 200,
+            hue_curve: "easeInQuad",
+            sat_start: 20,
+            sat_end: 50,
+            sat_curve: "easeOutQuad",
+            sat_rate: 200,
+            lum_start: 100,
+            lum_end: 50,
+            lum_curve: "linear",
+            modifier: 10
+        }
+    }).map(color => (
+        `rgba(
+            ${color.rgb[0]}, 
+            ${color.rgb[1]}, 
+            ${color.rgb[2]}, 
+            ${transparent || 1}
+        )`
+    ));
 
     return <Segment basic>
         <Header as='h3'>Home</Header>
@@ -46,22 +70,8 @@ const HomeView = ({
                         datasets: [{
                             label: '# of Votes',
                             data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
+                            backgroundColor: colors(6, .3),
+                            borderColor: colors(6),
                             borderWidth: 1
                         }]
                     }}
@@ -74,12 +84,12 @@ const HomeView = ({
                         datasets: [{
                             data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
                             label: "Africa",
-                            borderColor: "#3e95cd",
+                            borderColor: colors(2)[0],
                             fill: false
                         }, {
                             data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
                             label: "Asia",
-                            borderColor: "#8e5ea2",
+                            borderColor: colors(2)[1],
                             fill: false
                         }]
                     }}
@@ -94,7 +104,7 @@ const HomeView = ({
                         labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
                         datasets: [{
                             label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                            backgroundColor: colors(5),
                             data: [2478, 5267, 734, 784, 433]
                         }]
                     }}
@@ -108,18 +118,18 @@ const HomeView = ({
                             {
                                 label: "1950",
                                 fill: true,
-                                backgroundColor: "rgba(179,181,198,0.2)",
-                                borderColor: "rgba(179,181,198,1)",
+                                backgroundColor: colors(2, .2)[0],
+                                borderColor: colors(2)[0],
                                 pointBorderColor: "#fff",
-                                pointBackgroundColor: "rgba(179,181,198,1)",
+                                pointBackgroundColor: colors(2)[0],
                                 data: [8.77, 55.61, 21.69, 6.62, 6.82]
                             }, {
                                 label: "2050",
                                 fill: true,
-                                backgroundColor: "rgba(255,99,132,0.2)",
-                                borderColor: "rgba(255,99,132,1)",
+                                backgroundColor: colors(2, .2)[1],
+                                borderColor: colors(2)[1],
                                 pointBorderColor: "#fff",
-                                pointBackgroundColor: "rgba(255,99,132,1)",
+                                pointBackgroundColor: colors(2)[1],
                                 pointBorderColor: "#fff",
                                 data: [25.48, 54.16, 7.61, 8.06, 4.45]
                             }
