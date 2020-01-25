@@ -93,8 +93,10 @@ const FileInput = ({
         }
     }, [])
 
-    const handleDoubleClick = () => {
-        innerRef.current.click()
+    const handleClick = (e) => {
+        files.length === 0 ?
+            innerRef.current.click() :
+            e.preventDefault()
     }
 
     const handleOnFileChange = (e) => {
@@ -111,7 +113,7 @@ const FileInput = ({
     }
 
     return (
-        <div ref={dropRef} onDoubleClick={handleDoubleClick} 
+        <div ref={dropRef} onClick={handleClick} 
             className={classNames(classes.dropzone, {
                 [classes.error] : Boolean(error),
                 [classes.isDragging] : isDragging
@@ -161,7 +163,7 @@ const FileInput = ({
                         {error}
                     </span> :
                     <span className="m-auto">
-                        Drag 'n' drop some files here, or double click to select files
+                        Drag 'n' drop some files here, or click to select files
                     </span>
             }
         </div>
