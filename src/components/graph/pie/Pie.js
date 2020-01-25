@@ -26,6 +26,10 @@ const Pie = ({
         new Chart(ctx, {
             type: 'pie',
             data,
+            options : {
+                responsive : true,
+                maintainAspectRatio : false
+            }
         });
     }, [])
 

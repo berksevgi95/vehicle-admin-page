@@ -26,6 +26,10 @@ const Radar = ({
         new Chart(ctx, {
             type: 'radar',
             data,
+            options : {
+                responsive : true,
+                maintainAspectRatio : false
+            }
         });
     }, [])
 
