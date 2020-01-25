@@ -8,14 +8,13 @@ import Container from '../components/container/Container'
 export default {
     layout1: (routes) => (
         <div className="w-full h-full flex">
-            <Sidebar>
-                <Container>
-                    <Header />
-                    <div className="view">
-                        {routes}
-                    </div>
-                </Container>
-            </Sidebar>
+            <Sidebar/>
+            <Container>
+                <Header />
+                <div className="view">
+                    {routes}
+                </div>
+            </Container>
         </div>
     ),
     layout2: (routes) => (

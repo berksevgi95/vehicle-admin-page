@@ -2,8 +2,6 @@ import React from 'react'
 import {
     Icon,
     Menu,
-    Segment,
-    Header,
     Image,
     Sidebar as SemanticUISidebar,
 } from 'semantic-ui-react'
@@ -14,39 +12,56 @@ import routes from '../../configs/routes';
 import { useMediaQuery } from 'react-responsive'
 
 const styles = {
-    sidebar : {
-        borderTop : 'none !important',
-        borderLeft : 'none !important',
-        borderBottom : 'none !important',
-        width : '150px !important' 
+
+    root : {
+        position : 'relative',
+        transition : '.3s',
+        width : 150,
+        height : '100%'
     },
-    pusher : {
-        height : '100% !important',
-        overflowY : 'auto !important'
+
+    mobile : {
+        position : 'absolute'
     },
-    fullWidth : {
-        width : 'calc(100% - 150px) !important'
+
+    collapsed : {
+        width : 0
     },
-    mobileFullWidth : {
-        width : '100% !important'
+
+    sidebar: {
+        borderTop: 'none !important',
+        borderLeft: 'none !important',
+        borderBottom: 'none !important',
+        width: '100% !important',
+        position : 'relative !important',
+        overflow : 'hidden !important'
     },
-    iconButton : {
-        position: 'fixed', 
-        transition : '.5s', 
-        zIndex : 999, 
-        display : 'flex',
-        height : '40px !important',
-        width : '40px !important',
-        '&:hover' : {
-            cursor : 'pointer',
+
+    iconButton: {
+        position: 'absolute',
+        zIndex: 999,
+        display: 'flex',
+        height: 40,
+        width: 40,
+        right : -40,
+        '&:hover': {
+            cursor: 'pointer',
         }
     },
-    icon : {
-        fontSize : '20px !important',
-        margin : 'auto !important'
+    
+    icon: {
+        fontSize: '20px !important',
+        margin: 'auto !important'
     },
-    negative : {
-        color : 'white !important'
+
+    background : {
+        zIndex: 1,
+        transition : '.3s',
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
+        top: 0,
+        background: 'rgba(0, 0, 0, 0.42)',
     }
 }
 
@@ -56,8 +71,8 @@ const Sidebar = ({
     ...props
 }) => {
 
-    const [sidebar, setSidebar] = React.useState(true)
     const mobile = useMediaQuery({ maxWidth: 599 })
+    const [sidebar, setSidebar] = React.useState(!mobile)
 
     const handleCloseSidebar = () => {
         mobile && setSidebar(false)
@@ -66,38 +81,30 @@ const Sidebar = ({
     const toggleSidebar = () => {
         setSidebar(!sidebar)
     }
-    
-    React.useState(() => {
-        handleCloseSidebar()
-    }, [])
 
-    return <SemanticUISidebar.Pushable as={Segment} className="w-full">
-        
-        <div 
-            onClick={toggleSidebar} 
-            style={{left : sidebar ? 150 : 0}} 
-            className={classes.iconButton}
-        >
-            <Icon className={classNames(
-                classes.icon,
-                mobile && sidebar && classes.negative
-            )} name={sidebar ? 'outdent' : 'indent'}></Icon>
+    return <div className={classNames(classes.root, {
+            [classes.collapsed] : !sidebar,
+            [classes.mobile] : mobile
+        })}>
+
+        <div onClick={toggleSidebar} className={classes.iconButton}>
+            <Icon className={classes.icon} name={sidebar ? 'outdent' : 'indent'}></Icon>
         </div>
+        
         <SemanticUISidebar
             className={classes.sidebar}
             as={Menu}
-            animation={mobile ? "overlay" :"push"}
             direction={"left"}
             icon='labeled'
             vertical
-            visible={sidebar}
+            visible
             width='thin'
         >
             <Menu.Item as="div" onClick={handleCloseSidebar}>
                 <Link to={"/"} >
                     <Image src='/assets/icons/logo.png' />
                 </Link>
-                
+
             </Menu.Item>
 
             {routes &&
@@ -108,24 +115,18 @@ const Sidebar = ({
                     </Menu.Item>
                 )
             )}
-            
-        </SemanticUISidebar>
 
-        <SemanticUISidebar.Pusher 
-            dimmed={mobile && sidebar} 
-            className={classNames(
-                classes.pusher,
-                !mobile && sidebar ? classes.fullWidth : classes.mobileFullWidth
-            )}
-        >
-            {children}
-        </SemanticUISidebar.Pusher>
-    </SemanticUISidebar.Pushable>
+        </SemanticUISidebar>
+        {mobile && sidebar &&
+            <div onClick={handleCloseSidebar} className={classes.background}/>
+        }
+    </div>
+    
+    
+
 }
 
 
 export default injectSheet(styles)(
     Sidebar
 )
-
-  
