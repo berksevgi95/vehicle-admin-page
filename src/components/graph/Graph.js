@@ -9,7 +9,7 @@ import {
 
 const styles = {
     '@global' : {
-        'i' : {
+        'div[role="listbox"] i' : {
             margin : '0px !important'
         }
     },
