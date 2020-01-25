@@ -34,7 +34,8 @@ const Line = ({
                         }
                     }]
                 },
-                responsive : true
+                responsive : true,
+                maintainAspectRatio : false
             }
         });
     }, [])

@@ -34,7 +34,8 @@ const Bar = ({
                         }
                     }]
                 },
-                responsive : true
+                responsive : true,
+                maintainAspectRatio : false,
             }
         });
     }, [])
