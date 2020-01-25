@@ -88,7 +88,7 @@ const Sidebar = ({
         })}>
 
         <div onClick={toggleSidebar} className={classes.iconButton}>
-            <Icon className={classes.icon} name={sidebar ? 'outdent' : 'indent'}></Icon>
+            <Icon className={classes.icon} name={sidebar ? 'angle left' : 'angle right'}></Icon>
         </div>
         
         <SemanticUISidebar
@@ -121,11 +121,7 @@ const Sidebar = ({
             <div onClick={handleCloseSidebar} className={classes.background}/>
         }
     </div>
-    
-    
-
 }
-
 
 export default injectSheet(styles)(
     Sidebar
