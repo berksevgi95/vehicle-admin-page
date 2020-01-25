@@ -11,6 +11,7 @@ import SearchView from '../views/search/SearchView';
 import SearchDetailView from '../views/search/detail/SearchDetailView';
 import AccidentsView from '../views/accidents/AccidentsView';
 import AccidentsDetailView from '../views/accidents/detail/AccidentsDetailView';
+import InsurancesView from '../views/insurances/InsurancesView';
 
 export default [{
         id : 1,
@@ -58,6 +59,19 @@ export default [{
     }, {
         id : 8,
         path: "/accidents/:id",
+        component: AccidentsDetailView,
+    }, {
+        id : 9,
+        exact : true,
+        path: "/insurances",
+        component: InsurancesView,
+        icon: <Link to={"/insurances"} >
+            <Icon name='file alternate outline' />
+            Insurances
+        </Link>
+    }, {
+        id : 10,
+        path: "/insurances/:id",
         component: AccidentsDetailView,
     }
 ];
