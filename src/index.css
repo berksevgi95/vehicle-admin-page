@@ -9900,6 +9900,7 @@ video {
   height : calc(100% - 41px) !important;
   margin : 0px !important;
   overflow : auto !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 .view-horizontal {
