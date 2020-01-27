@@ -18,6 +18,7 @@ import OlSourceVector from 'ol/source/vector'
 import OlLayerVector from 'ol/layer/vector'
 import OlProj from 'ol/proj'
 import FileInput from '../../../components/file-input/FileInput';
+import TextEditor from '../../../components/text-editor/TextEditor';
 
 const AccidentsDetailView = ({
     postAccident,
@@ -110,6 +111,23 @@ const AccidentsDetailView = ({
             <Segment>
                 <Form.Field
                     control={Input}
+                    label='Description'
+                    id="description"
+                >
+                    {/* <textarea
+                        id="description"
+                        name="description"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.description}
+                    /> */}
+                    <TextEditor/>
+                </Form.Field>
+            </Segment>
+
+            <Segment>
+                <Form.Field
+                    control={Input}
                     label='Files'
                     id="files"
                 >
@@ -193,22 +211,6 @@ const AccidentsDetailView = ({
                     id="location"
                 >
                     <div id="map" style={{ width: "100%", height: 300 }}/>
-                </Form.Field>
-            </Segment>
-
-            <Segment>
-                <Form.Field
-                    control={Input}
-                    label='Description'
-                    id="description"
-                >
-                    <textarea
-                        id="description"
-                        name="description"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.description}
-                    />
                 </Form.Field>
             </Segment>
 
