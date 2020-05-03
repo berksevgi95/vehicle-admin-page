@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react'
 
 import HomeView from "../views/home/HomeView";
@@ -22,10 +21,8 @@ export default [{
         path: "/vehicles",
         component: VehiclesView,
         exact : true,
-        icon: <Link to={"/vehicles"} >
-            <Icon name='car' />
-            Vehicles
-        </Link>
+        icon: <Icon name='car' className="m-icon" />,
+        title: 'Vehicles'
     }, {
         id : 3,
         path: "/vehicles/detail",
@@ -34,10 +31,8 @@ export default [{
         id : 4,
         path: "/settings",
         component: SettingsView,
-        icon: <Link to={"/settings"} >
-            <Icon name='settings' />
-            Settings
-        </Link>
+        icon: <Icon name='settings' className="m-icon" />,
+        title: 'Settings'
     }, {
         id : 5,
         path: "/search",
@@ -47,15 +42,13 @@ export default [{
         id : 6,
         path: "/search/:searchText",
         component: SearchDetailView
-    }, {
+    }, /* {
         id : 7,
         exact : true,
         path: "/accidents",
         component: AccidentsView,
-        icon: <Link to={"/accidents"} >
-            <Icon name='unlink' />
-            Accidents
-        </Link>
+        icon: <Icon name='unlink' className="m-icon" />,
+        title: 'Accidents'
     }, {
         id : 8,
         path: "/accidents/:id",
@@ -65,13 +58,11 @@ export default [{
         exact : true,
         path: "/insurances",
         component: InsurancesView,
-        icon: <Link to={"/insurances"} >
-            <Icon name='file alternate outline' />
-            Insurances
-        </Link>
+        icon: <Icon name='file alternate outline' className="m-icon" />,
+        title: 'Insurances'
     }, {
         id : 10,
         path: "/insurances/:id",
         component: AccidentsDetailView,
-    }
+    } */
 ];

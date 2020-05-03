@@ -1,28 +1,23 @@
 import React from 'react'
-import {
-    Icon,
-    Menu,
-    Dropdown,
-    Image
-} from 'semantic-ui-react'
 import * as AppActions from '../../store/app.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import routes from '../../configs/routes';
 import injectSheet from 'react-jss'
-import { DebounceInput } from 'react-debounce-input';
+import { Input } from 'bs-ui-components';
+import { Image } from 'semantic-ui-react';
+import classNames from 'classnames';
 
 const styles = {
     header :  {
-        margin : '0px !important',
-        height : '65px !important'
+        height: 60,
+        width: '100%',
+        padding: '1rem',
+        borderBottom: '1px solid #CCCCCC',
+        display: 'flex',
+        alignItems: 'center'
     },
-    horizontalHeader : {
-        borderTop: 'none !important',
-        borderLeft: 'none !important',
-        borderRight: 'none !important',
-    }
 }
 
 
@@ -40,55 +35,35 @@ const Header = ({
         history.push(`/search/${e.target.value || ""}`)
     }
 
-    return horizontal ?
-        <Menu stackable className={classes.header}>
-            <Menu.Item>
-                <Link to="/">
+    return horizontal ? (
+        <header className={classNames(classes.header, "justify-between")}>
+            <div className="flex">
+                <Link className="mr-3" to="/">
                     <Image size={"mini"} src='assets/icons/logo.png' />
                 </Link>
-            </Menu.Item>
-
-            {routes &&
-                routes.length > 0 &&
-                routes.map(route => route.icon && (
-                    <Menu.Item>
-                        {route.icon}
-                    </Menu.Item>
-                )
-            )}
-
-            <div className='ui right aligned category search item'>
-                <div className='ui transparent icon input'>
-                    <DebounceInput
-                        minLength={2}
-                        placeholder={"Search"}
-                        debounceTimeout={500}
-                        onChange={handleNavigateSearch}
-                    />
-
-                    <i className='search link icon' onClick={handleNavigateSearch} />
-                </div>
-                <div className='results' />
+                {routes &&
+                    routes.length > 0 &&
+                    routes.map(route => route.icon && (
+                        <div className="mx-3 flex items-center">
+                            <Link className="flex" to={route.path}>
+                                <div className="mr-2">
+                                    {route.icon}
+                                </div>
+                                <span className="truncate">
+                                    {route.title}
+                                </span>
+                            </Link>
+                        </div>
+                    )
+                )}
             </div>
-        </Menu> :
-
-        <Menu attached='top' className={classes.horizontalHeader}>
-            <Menu.Menu position='right'>
-                <div className='ui right aligned category search item'>
-                    <div className='ui transparent icon input'>
-                        <DebounceInput
-                            minLength={2}
-                            placeholder={"Search"}
-                            debounceTimeout={500}
-                            onChange={handleNavigateSearch} 
-                        />
-
-                        <i className='search link icon' onClick={handleNavigateSearch}/>
-                    </div>
-                    <div className='results' />
-                </div>
-            </Menu.Menu>
-        </Menu>
+            <Input onChange={handleNavigateSearch} placeholder="Search" />
+        </header>
+    ) : (
+        <header className={classNames(classes.header, "justify-end")}>
+            <Input onChange={handleNavigateSearch} placeholder="Search"/>
+        </header>
+    )
 }
 
 

@@ -10,7 +10,7 @@
 }
 
 .view {
-    height : calc(100% - 41px) !important;
+    height : calc(100% - 60px) !important;
     margin : 0px !important;
     overflow : auto !important;
     -webkit-overflow-scrolling: touch !important;
@@ -213,3 +213,18 @@
     bottom: 0;
     transform: rotate(45deg);
   }
+
+
+
+
+.m-icon {
+  margin: 0px !important;
+  height: 14px !important;
+  width: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+}
+
+.bs-dialog .panel {
+  min-width: auto;
+}

@@ -1,13 +1,8 @@
 import React from 'react'
 import {
-    Header,
-    Image,
-    Button,
-    Segment,
     Table, 
     Icon,
     Menu,
-    Sidebar,
     Checkbox,
 } from 'semantic-ui-react'
 import * as VehiclesActions from './store/vehicles.actions';
@@ -16,6 +11,10 @@ import { connect } from 'react-redux'
 import VehiclesViewForm from './VehiclesViewForm';
 import VehiclesViewFilterForm from './VehiclesViewFilterForm';
 import { List } from 'immutable';
+
+import {
+    Button, BSTheme
+} from 'bs-ui-components'
 
 const VehiclesView = ({
     vehicles,
@@ -66,28 +65,57 @@ const VehiclesView = ({
             setSelected(List()) 
     }
 
-    return <Segment basic>
+    return <div className="w-full h-full p-4">
         <div className="flex justify-between">
-            <Header as='h3'>Vehicles</Header>
+            <h3 className="text-2xl">Vehicles</h3>
             <div className="flex">
                 {selected ? 
                 <React.Fragment>
-                    <Button compact onClick={openVehicleFilterbar} icon="filter" />
-                    <Button compact disabled={selected.size === 0} icon="trash alternate"/>
+                    <Button onClick={openVehicleFilterbar}>
+                        <Icon name="filter"></Icon>
+                    </Button>
+                    <Button disabled={selected.size === 0}>
+                        <Icon name="trash alternate"></Icon>
+                    </Button>
                 </React.Fragment> : 
                 <React.Fragment>
-                    <Button id="add-vehicle-dialog-button" compact onClick={openVehicleForm.bind(this, null)}>
+                    <Button
+                        theme={BSTheme.SECONDARY}
+                        className="mr-2"
+                        id="add-vehicle-dialog-button"
+                        onClick={openVehicleForm.bind(this, null)}
+                    >
                         <Icon name="add"></Icon>
                         Add Vehicle
                     </Button>
-                    <Button compact onClick={getVehicles} icon="refresh" />
-                    <Button compact onClick={openVehicleFilterbar} icon="filter" />
+                    <Button
+                        className="mr-2 hidden sm:block"
+                        onClick={getVehicles}
+                    >
+                        <Icon name="refresh m-icon"></Icon>
+                    </Button>
+                    <Button
+                        className="mr-2 hidden sm:block"
+                        onClick={openVehicleFilterbar}
+                    >
+                        <Icon name="filter m-icon"></Icon>
+                    </Button>
                 </React.Fragment>
-                
                 }
-                <Button compact onClick={toggleSelection} icon="tasks" active={Boolean(selected)}/>
+                <Button
+                    onClick={toggleSelection}
+                    disabled={!Boolean(selected)}
+                    className="hidden sm:block"
+                >
+                    <Icon name="tasks m-icon"></Icon>
+                </Button>
             </div>
         </div>
+        
+
+        
+
+
         <Table celled padded selectable>
             <Table.Header>
                 <Table.Row>
@@ -184,7 +212,7 @@ const VehiclesView = ({
             addVehicleDialog.open &&
             <VehiclesViewForm/>
         }
-    </Segment>
+    </div>
 }
 
 

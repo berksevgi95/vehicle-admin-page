@@ -1,15 +1,16 @@
 import React from 'react'
-import { 
-    Button, 
-    Modal, 
-    Form, 
-    Input
-} from 'semantic-ui-react'
 
 import * as VehiclesActions from './store/vehicles.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { useFormik } from 'formik';
+import { Formik } from "formik";
+
+import {
+    Dialog,
+    BSTheme,
+    Input,
+    Button
+} from 'bs-ui-components'
 
 
 const VehiclesViewForm = ({
@@ -20,105 +21,125 @@ const VehiclesViewForm = ({
     ...props
 }) => {
 
-    const formik = useFormik({
-        initialValues: addVehicleDialog.data || {
-            brand: '',
-            modelName: '',
-            req: '',
-            req_alter: '',
-        },
-        onSubmit: values => {
-            postVehicle(values).then(() => {
-                formik.resetForm()
-                closeVehicleForm()
-            })
-        },
-        validate: ({
-            brand,
-            modelName,
-            req,
-            req_alter
-        }) => {
-            const errors = {};
-            if (!req) {
-                errors.req = 'Required';
-            } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(req)
-            ) {
-                errors.req = 'Invalid email address';
-            }
-            return errors;
-        }
-    });
-
     return (
-        <Modal dimmer={"blurring"} open onClose={closeVehicleForm}>
-            <Modal.Header>Select a Photo</Modal.Header>
-            <Modal.Content>
-                <Form onSubmit={formik.handleSubmit}>
-                    <Form.Field 
-                        control={Input} 
-                        label='Brand' 
-                        placeholder='Ex. Ford, Volkswagen, etc.'
-                        id="brand" 
-                    >
-                        <input
-                            id="brand"
-                            name="brand"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.brand}
-                        />
-                    </Form.Field>
-                    <Form.Field 
-                        control={Input} 
-                        label='Model Name' 
-                        placeholder='Ex. Focus, Golf, etc.' 
-                        id="modelName" 
-                    >
-                        <input
-                            id="modelName"
-                            name="modelName"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.modelName}
-                        />
-                    </Form.Field>
-                    <Form.Field 
-                        control={Input} 
-                        label='Req' 
-                        placeholder='joe@schmoe.com' 
-                        id="req" 
-                        error={formik.errors.req && {
-                            content: formik.errors.req,
-                            pointing: 'above',
-                        }}
-                    >
-                        <input
-                            id="req"
-                            name="req"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.req}
-                        />
-                    </Form.Field>
-                    <Form.Field 
-                        control={Input} 
-                        label='Req Alter' 
-                        id="req_alter" 
-                    >
-                        <input
-                            id="req_alter"
-                            name="req_alter"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.req_alter}
-                        />
-                    </Form.Field>
-                    <Button type='submit'>Submit</Button>
-                </Form>
-            </Modal.Content>
-        </Modal>
+        <Dialog
+            title="Dialog"
+            closeOnEsc
+            closeButton
+            open
+            theme={BSTheme.PRIMARY}
+            handleClose={closeVehicleForm}
+        >
+            <Formik
+                initialValues={addVehicleDialog.data || {
+                    brand: '',
+                    modelName: '',
+                    req: '',
+                    req_alter: '',
+                }}
+                onSubmit={(values) => {
+                    postVehicle(values).then(() => {
+                        // formik.resetForm()
+                        closeVehicleForm()
+                    })
+                }}
+                validate={({
+                    brand,
+                    modelName,
+                    req,
+                    req_alter
+                }) => {
+                    const errors = {};
+                    if (!req) {
+                        errors.req = 'Required';
+                    } else if (
+                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(req)
+                    ) {
+                        errors.req = 'Invalid email address';
+                    }
+                    return errors;
+                }}
+            >
+                {props => {
+                    const {
+                        values,
+                        touched,
+                        errors,
+                        dirty,
+                        isSubmitting,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        handleReset
+                    } = props;
+                    return (
+                        <form onSubmit={handleSubmit}>
+                            <Input
+                                className="mb-4"
+                                id="brand"
+                                name="brand"
+                                type="text"
+                                value={values.brand}
+                                onChange={handleChange}
+                                placeholder="Ex. Ford, Volkswagen, etc."
+                            >
+                                Brand
+                            </Input>
+                            <Input
+                                className="mb-4"
+                                id="modelName"
+                                name="modelName"
+                                type="text"
+                                value={values.modelName}
+                                onChange={handleChange}
+                                placeholder="Ex. Focus, Golf, etc."
+                            >
+                                Model Name
+                            </Input>
+                            <Input
+                                id="req"
+                                className="mb-4"
+                                name="req"
+                                type="text"
+                                value={values.req}
+                                onChange={handleChange}
+                                placeholder="joe@schmoe.com"
+                            >
+                                Req
+                            </Input>
+                            <Input
+                                className="mb-8"
+                                id="req_alter"
+                                name="req_alter"
+                                type="text"
+                                value={values.req_alter}
+                                onChange={handleChange}
+                            >
+                                Req Alter
+                            </Input>
+
+                            <div className="flex justify-between">
+                                <Button
+                                    type="button"
+                                    className="outline"
+                                    onClick={closeVehicleForm}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    theme={BSTheme.SECONDARY}
+                                >
+                                    Submit
+                                </Button>
+                            </div>
+
+                        </form>
+                    );
+                }}
+            </Formik>   
+        </Dialog>
     )
 }
 
