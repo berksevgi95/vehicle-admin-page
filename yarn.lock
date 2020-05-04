@@ -2550,10 +2550,10 @@ browserslist@^4.11.1, browserslist@^4.12.0, browserslist@^4.8.0:
     node-releases "^1.1.53"
     pkg-up "^2.0.0"
 
-bs-ui-components@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/bs-ui-components/-/bs-ui-components-1.0.8.tgz#ebfc752af6054f1fe4241969e729476ad708c8d0"
-  integrity sha512-50eytDba/aFQFBe4oUnezxDBsizC0l7E09BIwvNa+iuS7s1VkBBv0f+K4kBJXZGIUmbziI3VRLWnpyQdNOAlaQ==
+bs-ui-components@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/bs-ui-components/-/bs-ui-components-1.0.10.tgz#c46b55913ba2d299aaf8e3e947952aecaac13605"
+  integrity sha512-PAfOnQIw346YmOkVfg8Jt9uW6LnDShKWnY26gsSEzE+6ILqfFFafkoXmTVjwG7+w+ghTKXizJ15cFenwhzjp3Q==
   dependencies:
     "@types/react-test-renderer" "^16.9.2"
     "@types/yup" "^0.26.32"

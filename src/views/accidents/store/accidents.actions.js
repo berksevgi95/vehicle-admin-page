@@ -1,5 +1,5 @@
 import { get, post } from '../../../utils/request'
-import { NotificationManager } from 'react-notifications'
+import { EMessageTypes } from 'bs-ui-components'
 
 export const GET_ACCIDENTS = "GET_ACCIDENTS"
 export const POST_ACCIDENT = "POST_ACCIDENT"
@@ -14,7 +14,11 @@ export const getAccidents = () => {
             })
             return new Promise((resolve, reject) => resolve(response))
         }, (exception) => {
-            NotificationManager.error(exception.error)
+            window.messageRef.fire({
+                message: exception.error,
+                type: EMessageTypes.ERROR,
+                timeout: 5000
+            })
         })
     }
 }
@@ -26,10 +30,18 @@ export const postVehicle = (accident) => {
                 type : POST_ACCIDENT,
                 payload : response
             })
-            NotificationManager.success("Accident has been added")
+            window.messageRef.fire({
+                message: "Accident has been added",
+                type: EMessageTypes.SUCCESS,
+                timeout: 5000
+            })
             return new Promise((resolve, reject) => resolve(response))
         }, (exception) => {
-            NotificationManager.error(exception.error)
+            window.messageRef.fire({
+                message: exception.error,
+                type: EMessageTypes.ERROR,
+                timeout: 5000
+            })
         })
     }
 }
