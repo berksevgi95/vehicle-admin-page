@@ -35,8 +35,20 @@ const styles = {
         overflowX: 'hidden'
     },
 
+    link: {
+        transition: '.3s',
+        width: '100%',
+        padding: '1rem',
+        paddingTop: '.5rem',
+        paddingBottom: '.5rem',
+        '&:hover' : {
+            background: '#429990',
+        }
+    },
+
     mobile : {
-        position : 'absolute'
+        position : 'absolute',
+        zIndex: 1,
     },
 
     collapsed : {
@@ -62,6 +74,10 @@ const Sidebar = ({
 
     const mobile = useMediaQuery({ maxWidth: 599 })
     const [sidebar, setSidebar] = React.useState(!mobile)
+
+    React.useEffect(() => {
+        setSidebar(!mobile)
+    }, [mobile])
 
     const toggleSidebar = () => {
         setSidebar(!sidebar)
@@ -89,7 +105,7 @@ const Sidebar = ({
                 {routes &&
                     routes.length > 0 &&
                     routes.map(route => route.icon && (
-                        <div key={route.id} className="w-full p-4 pt-0">
+                        <div key={route.id} className={classes.link}>
                             <Link className="flex" to={route.path}>
                                 <div className="mr-2 text-white">
                                     {route.icon}

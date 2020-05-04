@@ -2550,10 +2550,10 @@ browserslist@^4.11.1, browserslist@^4.12.0, browserslist@^4.8.0:
     node-releases "^1.1.53"
     pkg-up "^2.0.0"
 
-bs-ui-components@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/bs-ui-components/-/bs-ui-components-1.0.7.tgz#87d15b66c704e73edbb1e09bf697a444ec81a1e3"
-  integrity sha512-6Bxhfz7Xf1xOFJVOtgzVufGDfOM4nZjoSYlLushPgRGEPzk4I19MtmDwnFuG1eUver2AHalfYE8EXe9SPH2zTA==
+bs-ui-components@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/bs-ui-components/-/bs-ui-components-1.0.8.tgz#ebfc752af6054f1fe4241969e729476ad708c8d0"
+  integrity sha512-50eytDba/aFQFBe4oUnezxDBsizC0l7E09BIwvNa+iuS7s1VkBBv0f+K4kBJXZGIUmbziI3VRLWnpyQdNOAlaQ==
   dependencies:
     "@types/react-test-renderer" "^16.9.2"
     "@types/yup" "^0.26.32"
@@ -2750,10 +2750,15 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001010:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001020.tgz#3f04c1737500ffda78be9beb0b5c1e2070e15926"
   integrity sha512-yWIvwA68wRHKanAVS1GjN8vajAv7MBFshullKCeq/eKpK7pJBVDgFFEqvgWTkcP2+wIDeQGYFRXECjKZnLkUjA==
 
-caniuse-lite@^1.0.30001012, caniuse-lite@^1.0.30001017, caniuse-lite@^1.0.30001039, caniuse-lite@^1.0.30001043:
+caniuse-lite@^1.0.30001012, caniuse-lite@^1.0.30001017:
   version "1.0.30001048"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001048.tgz#4bb4f1bc2eb304e5e1154da80b93dee3f1cf447e"
   integrity sha512-g1iSHKVxornw0K8LG9LLdf+Fxnv7T1Z+mMsf0/YYLclQX4Cd522Ap0Lrw6NFqHgezit78dtyWxzlV2Xfc7vgRg==
+
+caniuse-lite@^1.0.30001039, caniuse-lite@^1.0.30001043:
+  version "1.0.30001050"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001050.tgz#11218af4b6b85dc1089536f31e10e3181e849e71"
+  integrity sha512-OvGZqalCwmapci76ISq5q4kuAskb1ebqF3FEQBv1LE1kWht0pojlDDqzFlmk5jgYkuZN7MNZ1n+ULwe/7MaDNQ==
 
 capture-exit@^2.0.0:
   version "2.0.0"

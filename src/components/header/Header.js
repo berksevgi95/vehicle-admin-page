@@ -14,7 +14,7 @@ const styles = {
         height: 60,
         width: '100%',
         padding: '1rem',
-        borderBottom: '1px solid #CCCCCC',
+        borderBottom: '1px solid #e2e8f0',
         display: 'flex',
         alignItems: 'center'
     },
