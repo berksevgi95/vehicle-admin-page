@@ -16,11 +16,11 @@ const styles = {
 const Line = ({
     classes,
     data,
-    ...props
+    options,
+    className,
+    id,
 }) => {
     
-    const id = React.useState(uuidv1());
-
     React.useEffect(() => {
         const ctx = document.getElementById(id);
         new Chart(ctx, {
@@ -35,14 +35,17 @@ const Line = ({
                     }]
                 },
                 responsive : true,
-                maintainAspectRatio : false
+                maintainAspectRatio : false,
+                ...options
             }
         });
     }, [])
 
-    return <Graph>
-        <canvas id={id} className={classes.canvas}></canvas>
-    </Graph>
+    return (
+        <Graph className={className}>
+            <canvas id={id} className={classes.canvas}></canvas>
+        </Graph>
+    );
 }
 
 export default injectSheet(styles)(Line);

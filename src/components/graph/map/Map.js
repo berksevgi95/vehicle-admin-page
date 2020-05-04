@@ -14,8 +14,12 @@ import OlSourceVector from 'ol/source/vector'
 import OlLayerVector from 'ol/layer/vector'
 import OlProj from 'ol/proj'
 
-const VehiclesDetailView = ({
-    ...props
+import Graph from '../Graph';
+
+
+const Map = ({
+    id,
+    className,
 }) => {
 
 
@@ -41,32 +45,31 @@ const VehiclesDetailView = ({
                 zoom: 3
             })
         });
-        olmap.setTarget("map");
+        olmap.setTarget(id);
 
-        const socket = socketIOClient('http://localhost:4000');
-        socket.on('change color', (col) => {
+        // const socket = socketIOClient('http://localhost:4000');
+        // socket.on('change color', (col) => {
 
-            vectorSource.clear()
-            col && col.length > 0 && col.forEach(coordinate => {
-                const marker = new OlFeature({
-                    geometry: new OlGeomPoint(
-                        OlProj.fromLonLat([coordinate.lon, coordinate.lat])
-                    )
-                });
-                vectorSource.addFeature(marker)
-            })
+        //     vectorSource.clear()
+        //     col && col.length > 0 && col.forEach(coordinate => {
+        //         const marker = new OlFeature({
+        //             geometry: new OlGeomPoint(
+        //                 OlProj.fromLonLat([coordinate.lon, coordinate.lat])
+        //             )
+        //         });
+        //         vectorSource.addFeature(marker)
+        //     })
             
 
-        })
+        // })
 
     }, [])
 
-    return <Segment basic className="w-full h-full">
-        <Header as='h3'>Application Content</Header>
-        <div id="map" style={{ width: "100%", height : 'calc(100% - 40px)' }}>
-        </div>
-
-    </Segment>
+    return (
+        <Graph className={className}>
+            <div id={id} className="w-full h-full"/>
+        </Graph>
+    )
 }
 
-export default VehiclesDetailView
+export default Map

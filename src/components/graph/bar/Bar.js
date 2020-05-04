@@ -1,7 +1,6 @@
 import React from 'react'
 import Chart from 'chart.js'
 import uuidv1 from 'uuid/v1';
-import { Segment } from 'semantic-ui-react';
 import injectSheet from 'react-jss'
 import Graph from '../Graph';
 
@@ -15,6 +14,7 @@ const styles = {
 
 const Bar = ({
     classes,
+    className,
     data,
     ...props
 }) => {
@@ -40,9 +40,11 @@ const Bar = ({
         });
     }, [])
 
-    return <Graph>
-        <canvas id={id} className={classes.canvas}></canvas>
-    </Graph>
+    return (
+        <Graph className={className}>
+            <canvas id={id} className={classes.canvas}></canvas>
+        </Graph>
+    )
 }
 
 export default injectSheet(styles)(Bar);

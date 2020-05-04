@@ -79,8 +79,10 @@ const Sidebar = ({
         setSidebar(!mobile)
     }, [mobile])
 
-    const toggleSidebar = () => {
-        setSidebar(!sidebar)
+    const toggleSidebar = (xsFlag) => () => {
+        if (!xsFlag || mobile){
+            setSidebar(!sidebar)
+        }
     }
 
     return (
@@ -90,10 +92,10 @@ const Sidebar = ({
         })}>
 
             <div className={classes.logoContainer}>
-                <Link className="h-full" to="/">
+                <Link onClick={toggleSidebar(true)} className="h-full" to="/">
                     <Image className="h-full" src='/assets/icons/logo.png' />
                 </Link>
-                <div onClick={toggleSidebar}>
+                <div onClick={toggleSidebar(false)}>
                     <Icon
                         className={classNames(classes.icon, !sidebar ? "text-black" : "text-white")}
                         name={sidebar ? 'angle left' : 'angle right'}
@@ -105,7 +107,7 @@ const Sidebar = ({
                 {routes &&
                     routes.length > 0 &&
                     routes.map(route => route.icon && (
-                        <div key={route.id} className={classes.link}>
+                        <div onClick={toggleSidebar(true)} key={route.id} className={classes.link}>
                             <Link className="flex" to={route.path}>
                                 <div className="mr-2 text-white">
                                     {route.icon}
