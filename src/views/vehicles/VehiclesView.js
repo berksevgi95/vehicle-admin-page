@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Table, 
+    // Table, 
     Icon,
     Menu,
     Checkbox,
@@ -13,7 +13,9 @@ import VehiclesViewFilterForm from './VehiclesViewFilterForm';
 import { List } from 'immutable';
 
 import {
-    Button, BSTheme
+    Button,
+    BSTheme,
+    Table
 } from 'bs-ui-components'
 
 const VehiclesView = ({
@@ -65,7 +67,7 @@ const VehiclesView = ({
             setSelected(List()) 
     }
 
-    return <div className="w-full h-full p-4">
+    return <div className="w-full p-4">
         <div className="flex justify-between">
             <h3 className="text-2xl">Vehicles</h3>
             <div className="flex">
@@ -113,95 +115,85 @@ const VehiclesView = ({
         </div>
         
 
-        
-
-
-        <Table celled padded selectable>
-            <Table.Header>
+        <Table.Table className="mt-4">
+            <Table.Head>
                 <Table.Row>
                     {selected && 
-                        <Table.HeaderCell textAlign="center">
+                        <Table.Title>
                             <Checkbox 
                                 onChange={handleSelectAllVehicles}
                                 checked={selected.size === vehicles.size}
                                 indeterminate={selected.size > 0 && selected.size !== vehicles.size}
                             />
-                        </Table.HeaderCell>
+                        </Table.Title>
                     }
-                    <Table.HeaderCell singleLine>id</Table.HeaderCell>
-                    <Table.HeaderCell>Brand</Table.HeaderCell>
-                    <Table.HeaderCell>Model Name</Table.HeaderCell>
-                    <Table.HeaderCell>req</Table.HeaderCell>
-                    <Table.HeaderCell>req_alter</Table.HeaderCell>
-                    {!selected && <Table.HeaderCell></Table.HeaderCell>}
+                    <Table.Title>
+                        id
+                    </Table.Title>
+                    <Table.Title>
+                        Brand
+                    </Table.Title>
+                    <Table.Title>
+                        Model Name
+                    </Table.Title>
+                    <Table.Title>
+                        req
+                    </Table.Title>
+                    <Table.Title>
+                        req_alter
+                    </Table.Title>
+                    {!selected && (
+                        <Table.Title/>
+                    )}
                 </Table.Row>
-            </Table.Header>
+            </Table.Head>
 
             <Table.Body>
                 {vehicles &&
                     vehicles.size > 0 &&
                     vehicles.map(vehicle => (
-                        <Table.Row 
+                        <Table.Row
                             onClick={handleClickRow.bind(this, vehicle)} 
                             onDoubleClick={handleNavigateDetail} 
                             key={vehicle.id}
                         >
                             {selected &&
-                                <Table.Cell textAlign="center">
+                                <Table.Cell>
                                     <Checkbox checked={isVehicleChecked(vehicle)}/>
                                 </Table.Cell>
                             }
                             <Table.Cell>
                                 {vehicle.id}
                             </Table.Cell>
-                            <Table.Cell singleLine>
+                            <Table.Cell>
                                 {vehicle.brand}                            
                             </Table.Cell>
                             <Table.Cell>
                                 {vehicle.modelName}
                             </Table.Cell>
-                            <Table.Cell textAlign='right'>
+                            <Table.Cell>
                                 {vehicle.req}
                             </Table.Cell>
                             <Table.Cell>
-                                {vehicle.req_alter}
+                                {vehicle.reqAlter}
                             </Table.Cell>
                             {!selected && 
-                                <Table.Cell textAlign="center">
+                                <Table.Cell>
                                     <Button 
-                                        size='mini' 
-                                        icon='edit' 
                                         onClick={openVehicleForm.bind(this, vehicle)}
-                                    />
-                                    <Button 
-                                        size='mini' 
-                                        icon='delete' 
-                                    />
+                                    >
+                                        <Icon name="edit m-icon"></Icon>
+                                    </Button>
+                                    <Button>
+                                        <Icon name="delete m-icon"></Icon>
+                                    </Button>
                                 </Table.Cell>
                             }
                         </Table.Row>
                     ))}
                 
             </Table.Body>
-            <Table.Footer>
-                <Table.Row>
-                    <Table.HeaderCell colSpan='6'>
-                        <Menu floated='right' pagination>
-                            <Menu.Item as='a' icon>
-                                <Icon name='chevron left' />
-                            </Menu.Item>
-                            <Menu.Item as='a'>1</Menu.Item>
-                            <Menu.Item as='a'>2</Menu.Item>
-                            <Menu.Item as='a'>3</Menu.Item>
-                            <Menu.Item as='a'>4</Menu.Item>
-                            <Menu.Item as='a' icon>
-                                <Icon name='chevron right' />
-                            </Menu.Item>
-                        </Menu>
-                    </Table.HeaderCell>
-                </Table.Row>
-            </Table.Footer>
-        </Table>
+        </Table.Table>
 
         {vehicleFilterbar &&
             vehicleFilterbar.open &&

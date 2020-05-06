@@ -11,18 +11,138 @@ export const CLOSE_VEHICLE_FILTERBAR = "CLOSE_VEHICLE_FILTERBAR"
 
 export const getVehicles = () => {
     return (dispatch) => {
-        return get("http://localhost:5500", "/", (response) => {
-            dispatch({
-                type : GET_VEHICLES,
-                payload : response
-            })
-            return new Promise((resolve, reject) => resolve(response))
-        }, (exception) => {
-            window.messageRef.fire({
-                message: exception.error,
-                type: EMessageTypes.ERROR,
-                timeout: 5000
-            })
+        // return get("http://localhost:5500", "/", (response) => {
+        //     dispatch({
+        //         type : GET_VEHICLES,
+        //         payload : response
+        //     })
+        //     return new Promise((resolve, reject) => resolve(response))
+        // }, (exception) => {
+        //     window.messageRef.fire({
+        //         message: exception.error,
+        //         type: EMessageTypes.ERROR,
+        //         timeout: 5000
+        //     })
+        // })
+
+        dispatch({
+            type : GET_VEHICLES,
+            payload : [{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },
+            {
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },{
+                id: 1,
+                brand: 'asdasd',
+                modelName: 'asdnömvxcövn',
+                req: 10,
+                reqAlter: 41
+            },]
         })
     }
 }
