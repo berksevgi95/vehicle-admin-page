@@ -34,8 +34,8 @@ const VehiclesViewForm = ({
                 initialValues={addVehicleDialog.data || {
                     brand: '',
                     modelName: '',
-                    req: '',
-                    req_alter: '',
+                    year: '',
+                    km: '',
                 }}
                 onSubmit={(values) => {
                     postVehicle(values).then(() => {
@@ -46,16 +46,12 @@ const VehiclesViewForm = ({
                 validate={({
                     brand,
                     modelName,
-                    req,
-                    req_alter
+                    year,
+                    km
                 }) => {
                     const errors = {};
-                    if (!req) {
-                        errors.req = 'Required';
-                    } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(req)
-                    ) {
-                        errors.req = 'Invalid email address';
+                    if (!year) {
+                        errors.year = 'Required';
                     }
                     return errors;
                 }}
@@ -74,49 +70,56 @@ const VehiclesViewForm = ({
                     } = props;
                     return (
                         <form onSubmit={handleSubmit}>
-                            <Input
-                                className="mb-4"
-                                id="brand"
-                                name="brand"
-                                type="text"
-                                value={values.brand}
-                                onChange={handleChange}
-                                placeholder="Ex. Ford, Volkswagen, etc."
-                            >
-                                Brand
-                            </Input>
-                            <Input
-                                className="mb-4"
-                                id="modelName"
-                                name="modelName"
-                                type="text"
-                                value={values.modelName}
-                                onChange={handleChange}
-                                placeholder="Ex. Focus, Golf, etc."
-                            >
-                                Model Name
-                            </Input>
-                            <Input
-                                id="req"
-                                className="mb-4"
-                                name="req"
-                                type="text"
-                                value={values.req}
-                                onChange={handleChange}
-                                placeholder="joe@schmoe.com"
-                            >
-                                Req
-                            </Input>
-                            <Input
-                                className="mb-8"
-                                id="req_alter"
-                                name="req_alter"
-                                type="text"
-                                value={values.req_alter}
-                                onChange={handleChange}
-                            >
-                                Req Alter
-                            </Input>
+                            <div className="mb-4">
+                                <Input
+                                    id="brand"
+                                    name="brand"
+                                    type="text"
+                                    value={values.brand}
+                                    onChange={handleChange}
+                                    placeholder="Ex. Ford, Volkswagen, etc."
+                                >
+                                    Brand
+                                </Input>
+                            </div>
+                            <div className="mb-4">
+                                <Input
+                                    id="modelName"
+                                    name="modelName"
+                                    type="text"
+                                    value={values.modelName}
+                                    onChange={handleChange}
+                                    placeholder="Ex. Focus, Golf, etc."
+                                >
+                                    Model Name
+                                </Input>
+                            </div>
+                            <div className="mb-4">
+                                <Input
+                                    id="year"
+                                    name="year"
+                                    type="number"
+                                    value={values.year}
+                                    onChange={handleChange}
+                                    placeholder="Ex. 2010"
+                                    errorMsg={errors.year}
+                                >
+                                    Year
+                                </Input>
+                            </div>
+                            <div className="mb-8">
+                                <Input
+                                    id="km"
+                                    name="km"
+                                    type="number"
+                                    value={values.km}
+                                    placeholder="Ex. 512000"
+                                    onChange={handleChange}
+                                >
+                                    Km
+                                </Input>
+                            </div>
+                            
 
                             <div className="flex justify-between">
                                 <Button

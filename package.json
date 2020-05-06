@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "bezier-easing": "^2.1.0",
-    "bs-ui-components": "^1.0.12",
+    "bs-ui-components": "^1.0.14",
     "chart.js": "^2.9.3",
     "chroma-js": "^2.1.0",
     "draft-js": "^0.11.4",

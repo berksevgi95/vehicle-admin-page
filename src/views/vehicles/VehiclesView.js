@@ -137,10 +137,10 @@ const VehiclesView = ({
                         Model Name
                     </Table.Title>
                     <Table.Title>
-                        req
+                        Year
                     </Table.Title>
                     <Table.Title>
-                        req_alter
+                        Km
                     </Table.Title>
                     {!selected && (
                         <Table.Title/>
@@ -172,10 +172,10 @@ const VehiclesView = ({
                                 {vehicle.modelName}
                             </Table.Cell>
                             <Table.Cell>
-                                {vehicle.req}
+                                {vehicle.year}
                             </Table.Cell>
                             <Table.Cell>
-                                {vehicle.reqAlter}
+                                {vehicle.km}
                             </Table.Cell>
                             {!selected && 
                                 <Table.Cell>

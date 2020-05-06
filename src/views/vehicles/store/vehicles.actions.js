@@ -1,5 +1,6 @@
 import { get, post } from '../../../utils/request'
 import { EMessageTypes } from 'bs-ui-components'
+import { Vehicles } from '../../../@fake-db'
 
 export const GET_VEHICLES = "GET_VEHICLES"
 export const POST_VEHICLE = "POST_VEHICLE"
@@ -27,146 +28,46 @@ export const getVehicles = () => {
 
         dispatch({
             type : GET_VEHICLES,
-            payload : [{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },
-            {
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },{
-                id: 1,
-                brand: 'asdasd',
-                modelName: 'asdnömvxcövn',
-                req: 10,
-                reqAlter: 41
-            },]
+            payload : Vehicles
         })
     }
 }
 
 export const postVehicle = (vehicle) => {
     return (dispatch) => {
-        return post("http://localhost:5500", "/", vehicle, (response) => {
-            dispatch({
-                type : POST_VEHICLE,
-                payload : response
-            })
-            window.messageRef.fire({
-                message: "Vehicle has been added",
-                type: EMessageTypes.SUCCESS,
-                timeout: 5000
-            })
-            return new Promise((resolve, reject) => resolve(response))
-        }, (exception) => {
-            window.messageRef.fire({
-                message: exception.error,
-                type: EMessageTypes.ERROR,
-                timeout: 5000
-            })
+        // return post("http://localhost:5500", "/", vehicle, (response) => {
+        //     dispatch({
+        //         type : POST_VEHICLE,
+        //         payload : response
+        //     })
+        //     window.messageRef.fire({
+        //         message: "Vehicle has been added",
+        //         type: EMessageTypes.SUCCESS,
+        //         timeout: 5000
+        //     })
+        //     return new Promise((resolve, reject) => resolve(response))
+        // }, (exception) => {
+        //     window.messageRef.fire({
+        //         message: exception.error,
+        //         type: EMessageTypes.ERROR,
+        //         timeout: 5000
+        //     })
+        // })
+
+        window.messageRef.fire({
+            message: "Vehicle has been added",
+            type: EMessageTypes.SUCCESS,
+            timeout: 5000
         })
+        dispatch({
+            type : POST_VEHICLE,
+            payload : [...Vehicles, {
+                id: Vehicles.length + 1,
+                ...vehicle
+            }]
+        })
+
+        return new Promise((resolve, reject) => resolve());
     }
 }
 

@@ -3,29 +3,37 @@ export const Status = {
     DISPATCHED : 'Dispatched'
 }
 
-export const VehicleStatus = {
-    ACTIVE : 'Active',
-    PENDING : 'Pending',
-    INACTIVE : 'Inactive'
-}
 
 export const Vehicles = [{
-    id : 1,
-    name : 'a',
-    status : VehicleStatus[0],
-    coord : {
-        lat : 51.5096506001197,
-        lng : -0.16136169433593753
-    }
-},
-{
-    id : 2,
-    name : 'b',
-    status : VehicleStatus[1],
-    coord : {
-        lat : 51.52001281320712,
-        lng : -0.09149551391601562
-    }
+    id: 1,
+    brand: 'Ford',
+    modelName: 'Focus',
+    year: 2010,
+    km: 410000
+},{
+    id: 2,
+    brand: 'Peugeot',
+    modelName: '308',
+    year: 2011,
+    km: 32000
+},{
+    id: 3,
+    brand: 'Kia',
+    modelName: 'Ceed',
+    year: 2009,
+    km: 9910
+},{
+    id: 4,
+    brand: 'Kia',
+    modelName: 'Ceed',
+    year: 2009,
+    km: 9910
+},{
+    id: 5,
+    brand: 'BMW',
+    modelName: '320d',
+    year: 2020,
+    km: 900
 }]
 
 export const Drivers = [{
