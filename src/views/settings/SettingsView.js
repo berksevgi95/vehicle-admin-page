@@ -26,29 +26,28 @@ const SettingsView = ({
     classes,
     ...props
 }) => {
-    return <div className="w-full h-full p-4">
-        <h3 className="text-2xl">Settings</h3>
-
-        <div className="border border-gray-300 border-solid p-4 py-6 my-8 relative">
-            <span className={classes.tag}>
-                Layout Settings
-            </span>
-            <Select
-                className={classes.select}
-                value={layout}
-                options={[{
-                    label: 'Vertical Layout',
-                    value: 'layout1'
-                }, {
-                    label: 'Horizontal Layout',
-                    value: 'layout2'
-                }]}
-                onChange={(e) => changeLayout(e.target.value)}
-            />
+    return (
+        <div className="p-4">
+            <h3 className="text-2xl">Settings</h3>
+            <div className="border border-gray-300 border-solid p-4 py-6 my-8 relative">
+                <span className={classes.tag}>
+                    Layout Settings
+                </span>
+                <Select
+                    className={classes.select}
+                    value={layout}
+                    options={[{
+                        label: 'Vertical Layout',
+                        value: 'layout1'
+                    }, {
+                        label: 'Horizontal Layout',
+                        value: 'layout2'
+                    }]}
+                    onChange={(e) => changeLayout(e.target.value)}
+                />
+            </div>
         </div>
-        
-        
-    </div>
+    )
 }
 
 

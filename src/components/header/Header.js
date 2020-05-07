@@ -38,13 +38,13 @@ const Header = ({
     return horizontal ? (
         <header className={classNames(classes.header, "justify-between")}>
             <div className="flex">
-                <Link className="mr-3" to="/">
-                    <Image size={"mini"} src='assets/icons/logo.png' />
+                <Link className="mr-3 w-8 h-8" to="/">
+                    <Image size="mini" src='assets/icons/logo.png' />
                 </Link>
                 {routes &&
                     routes.length > 0 &&
                     routes.map(route => route.icon && (
-                        <div className="mx-3 flex items-center">
+                        <div key={route.id} className="mx-3 flex items-center">
                             <Link className="flex" to={route.path}>
                                 <div className="mr-2">
                                     {route.icon}
@@ -57,7 +57,7 @@ const Header = ({
                     )
                 )}
             </div>
-            <Input onChange={handleNavigateSearch} placeholder="Search" />
+            <Input className="hidden sm:block" onChange={handleNavigateSearch} placeholder="Search" />
         </header>
     ) : (
         <header className={classNames(classes.header, "justify-end")}>
