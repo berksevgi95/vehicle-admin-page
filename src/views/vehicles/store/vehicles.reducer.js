@@ -27,6 +27,12 @@ const vehicles = (state = vehiclesState, action) => {
                 vehicles : List(action.payload)
             }
         }
+        case VehiclesActions.DELETE_VEHICLE : {
+            return {
+                ...state,
+                vehicles : List(action.payload)
+            }
+        }
         case VehiclesActions.RESET_VEHICLES : {
             return {
                 ...vehiclesState

@@ -527,7 +527,11 @@ const HomeView = ({
     }
 
     React.useEffect(() => {
-        setTimeout(() => gridRef.current.onWindowResize(), 500)
+        setTimeout(() => {
+            if (gridRef.current) {
+                gridRef.current.onWindowResize()
+            }
+        }, 500)
     }, [])
 
     return (

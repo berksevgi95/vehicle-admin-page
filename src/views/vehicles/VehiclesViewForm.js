@@ -3,6 +3,7 @@ import React from 'react'
 import * as VehiclesActions from './store/vehicles.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import injectSheet from 'react-jss'
 import { Formik } from "formik";
 
 import {
@@ -13,11 +14,22 @@ import {
 } from 'bs-ui-components'
 
 
+const styles = {
+    dialog : {
+        '& .panel' : {
+            '& .content' : {
+                overflow: 'inherit'
+            }
+        }
+    }
+}
+
 const VehiclesViewForm = ({
     children,
     postVehicle,
     addVehicleDialog,
     closeVehicleForm,
+    classes,
     ...props
 }) => {
 
@@ -29,6 +41,7 @@ const VehiclesViewForm = ({
             open
             theme={BSTheme.PRIMARY}
             handleClose={closeVehicleForm}
+            className={classes.dialog}
         >
             <Formik
                 initialValues={addVehicleDialog.data || {
@@ -37,9 +50,9 @@ const VehiclesViewForm = ({
                     year: '',
                     km: '',
                 }}
-                onSubmit={(values) => {
+                onSubmit={(values, formikHelpers) => {
                     postVehicle(values).then(() => {
-                        // formik.resetForm()
+                        formikHelpers.resetForm()
                         closeVehicleForm()
                     })
                 }}
@@ -50,6 +63,12 @@ const VehiclesViewForm = ({
                     km
                 }) => {
                     const errors = {};
+                    if (!brand) {
+                        errors.brand = 'Required';
+                    }
+                    if (!modelName) {
+                        errors.modelName = 'Required';
+                    }
                     if (!year) {
                         errors.year = 'Required';
                     }
@@ -78,6 +97,7 @@ const VehiclesViewForm = ({
                                     value={values.brand}
                                     onChange={handleChange}
                                     placeholder="Ex. Ford, Volkswagen, etc."
+                                    errorMsg={errors.brand}
                                 >
                                     Brand
                                 </Input>
@@ -90,6 +110,7 @@ const VehiclesViewForm = ({
                                     value={values.modelName}
                                     onChange={handleChange}
                                     placeholder="Ex. Focus, Golf, etc."
+                                    errorMsg={errors.modelName}
                                 >
                                     Model Name
                                 </Input>
@@ -157,8 +178,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(VehiclesViewForm)
-
+export default injectSheet(styles)(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(VehiclesViewForm)
+);

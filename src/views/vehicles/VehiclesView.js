@@ -25,9 +25,9 @@ const VehiclesView = ({
     history,
     addVehicleDialog,
     openVehicleForm,
-
     vehicleFilterbar,
     openVehicleFilterbar,
+    deleteVehicle,
     ...props
 }) => {
 
@@ -67,6 +67,10 @@ const VehiclesView = ({
             setSelected(List()) 
     }
 
+    const handleDeleteVehicle = (vehicle) => {
+        deleteVehicle(vehicle)
+    }
+
     return <div className="w-full p-4">
         <div className="flex justify-between">
             <h3 className="text-2xl">Vehicles</h3>
@@ -94,13 +98,13 @@ const VehiclesView = ({
                         className="mr-2 hidden sm:block"
                         onClick={getVehicles}
                     >
-                        <Icon name="refresh m-icon"></Icon>
+                        <Icon className="m-icon" name="refresh"></Icon>
                     </Button>
                     <Button
                         className="mr-2 hidden sm:block"
                         onClick={openVehicleFilterbar}
                     >
-                        <Icon name="filter m-icon"></Icon>
+                        <Icon className="m-icon"  name="filter"></Icon>
                     </Button>
                 </React.Fragment>
                 }
@@ -109,7 +113,7 @@ const VehiclesView = ({
                     disabled={!Boolean(selected)}
                     className="hidden sm:block"
                 >
-                    <Icon name="tasks m-icon"></Icon>
+                    <Icon className="m-icon"  name="tasks"></Icon>
                 </Button>
             </div>
         </div>
@@ -182,10 +186,12 @@ const VehiclesView = ({
                                     <Button 
                                         onClick={openVehicleForm.bind(this, vehicle)}
                                     >
-                                        <Icon name="edit m-icon"></Icon>
+                                        <Icon className="m-icon" name="edit"></Icon>
                                     </Button>
-                                    <Button>
-                                        <Icon name="delete m-icon"></Icon>
+                                    <Button
+                                        onClick={handleDeleteVehicle.bind(this, vehicle)}
+                                    >
+                                        <Icon className="m-icon" name="delete"></Icon>
                                     </Button>
                                 </Table.Cell>
                             }
