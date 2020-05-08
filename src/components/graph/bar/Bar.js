@@ -16,7 +16,8 @@ const Bar = ({
     classes,
     className,
     data,
-    ...props
+    children,
+    options,
 }) => {
     
     const id = React.useState(uuidv1());
@@ -36,6 +37,7 @@ const Bar = ({
                 },
                 responsive : true,
                 maintainAspectRatio : false,
+                ...options,
             }
         });
     }, [])
@@ -43,6 +45,7 @@ const Bar = ({
     return (
         <Graph className={className}>
             <canvas id={id} className={classes.canvas}></canvas>
+            {children}
         </Graph>
     )
 }

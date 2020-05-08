@@ -1,7 +1,6 @@
 import React from 'react'
 import Chart from 'chart.js'
 import uuidv1 from 'uuid/v1';
-import { Segment } from 'semantic-ui-react';
 import injectSheet from 'react-jss'
 import Graph from '../Graph';
 
@@ -16,6 +15,8 @@ const styles = {
 const Radar = ({
     classes,
     data,
+    options,
+    className,
     ...props
 }) => {
     
@@ -28,14 +29,17 @@ const Radar = ({
             data,
             options : {
                 responsive : true,
-                maintainAspectRatio : false
+                maintainAspectRatio : false,
+                ...options
             }
         });
     }, [])
 
-    return <Graph>
-        <canvas id={id} className={classes.canvas}></canvas>
-    </Graph>
+    return (
+        <Graph className={className}>
+            <canvas id={id} className={classes.canvas}></canvas>
+        </Graph>
+    )
 }
 
 export default injectSheet(styles)(Radar);

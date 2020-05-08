@@ -1,7 +1,6 @@
 import React from 'react'
 import Chart from 'chart.js'
 import uuidv1 from 'uuid/v1';
-import { Segment } from 'semantic-ui-react';
 import injectSheet from 'react-jss'
 import Graph from '../Graph';
 
@@ -16,6 +15,9 @@ const styles = {
 const Pie = ({
     classes,
     data,
+    options,
+    children,
+    className,
     ...props
 }) => {
     
@@ -28,14 +30,18 @@ const Pie = ({
             data,
             options : {
                 responsive : true,
-                maintainAspectRatio : false
+                maintainAspectRatio : false,
+                ...options
             }
         });
     }, [])
 
-    return <Graph>
-        <canvas id={id} className={classes.canvas}></canvas>
-    </Graph>
+    return (
+        <Graph className={className}>
+            <canvas id={id} className={classes.canvas}></canvas>
+            {children}
+        </Graph>
+    )
 }
 
 export default injectSheet(styles)(Pie);

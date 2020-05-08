@@ -72,7 +72,7 @@ const VehiclesView = ({
     }
 
     return (
-        <div className="p-4">
+        <div className="fadein-animation p-4">
             <div className="flex justify-between">
                 <h3 className="text-2xl">Vehicles</h3>
                 <div className="flex">
@@ -128,7 +128,6 @@ const VehiclesView = ({
                                 <Checkbox 
                                     onChange={handleSelectAllVehicles}
                                     checked={selected.size === vehicles.size}
-                                    indeterminate={selected.size > 0 && selected.size !== vehicles.size}
                                 />
                             </Table.Title>
                         }

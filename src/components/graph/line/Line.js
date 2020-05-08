@@ -1,7 +1,5 @@
 import React from 'react'
 import Chart from 'chart.js'
-import uuidv1 from 'uuid/v1';
-import { Segment } from 'semantic-ui-react';
 import injectSheet from 'react-jss'
 import Graph from '../Graph';
 
@@ -18,6 +16,7 @@ const Line = ({
     data,
     options,
     className,
+    children,
     id,
 }) => {
     
@@ -43,7 +42,8 @@ const Line = ({
 
     return (
         <Graph className={className}>
-            <canvas id={id} className={classes.canvas}></canvas>
+            <canvas id={id} className={classes.canvas} />
+            {children}
         </Graph>
     );
 }

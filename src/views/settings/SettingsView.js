@@ -27,7 +27,7 @@ const SettingsView = ({
     ...props
 }) => {
     return (
-        <div className="p-4">
+        <div className="fadein-animation p-4">
             <h3 className="text-2xl">Settings</h3>
             <div className="border border-gray-300 border-solid p-4 py-6 my-8 relative">
                 <span className={classes.tag}>

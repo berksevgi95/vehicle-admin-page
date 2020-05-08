@@ -1,18 +1,18 @@
 import React from 'react'
-import socketIOClient from "socket.io-client";
-import {
-    Header,
-    Segment,
-} from 'semantic-ui-react'
+// import socketIOClient from "socket.io-client";
+// import {
+//     Header,
+//     Segment,
+// } from 'semantic-ui-react'
 import OlMap from "ol/map";
 import OlView from "ol/view";
 import OlLayerTile from "ol/layer/tile";
 import OlSourceOSM from "ol/source/osm";
-import OlFeature from 'ol/feature'
-import OlGeomPoint from 'ol/geom/point'
+// import OlFeature from 'ol/feature'
+// import OlGeomPoint from 'ol/geom/point'
 import OlSourceVector from 'ol/source/vector'
 import OlLayerVector from 'ol/layer/vector'
-import OlProj from 'ol/proj'
+// import OlProj from 'ol/proj'
 
 import Graph from '../Graph';
 
