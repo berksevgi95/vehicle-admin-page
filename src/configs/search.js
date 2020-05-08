@@ -8,8 +8,8 @@ export default [{
     title : 'Add Vehicle',
     description : 'Define new vehicle',
     action : (props) => Promise.resolve(
-            props.history.push('/vehicles')
-        ).then(
-            () => document.getElementById('add-vehicle-dialog-button').click()
-        )
+        props.history.push('/vehicles')
+    ).then(() => setTimeout(() => {
+        document.getElementById('add-vehicle-dialog-button').click()   
+    }, 250))
 }]

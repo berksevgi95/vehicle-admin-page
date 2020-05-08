@@ -8,9 +8,9 @@ import VehiclesDetailView from "../views/vehicles/detail/VehiclesDetailView";
 import SettingsView from "../views/settings/SettingsView";
 import SearchView from '../views/search/SearchView';
 import SearchDetailView from '../views/search/detail/SearchDetailView';
-import AccidentsView from '../views/accidents/AccidentsView';
-import AccidentsDetailView from '../views/accidents/detail/AccidentsDetailView';
-import InsurancesView from '../views/insurances/InsurancesView';
+// import AccidentsView from '../views/accidents/AccidentsView';
+// import AccidentsDetailView from '../views/accidents/detail/AccidentsDetailView';
+// import InsurancesView from '../views/insurances/InsurancesView';
 
 export default [{
         id : 1,

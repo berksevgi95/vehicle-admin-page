@@ -1,4 +1,4 @@
-import { get, post } from '../../../utils/request'
+// import { get, post } from '../../../utils/request'
 import { EMessageTypes } from 'bs-ui-components'
 import { Vehicles } from '../../../@fake-db'
 
@@ -62,10 +62,7 @@ export const postVehicle = (vehicle) => {
         })
         dispatch({
             type : POST_VEHICLE,
-            payload : [...Vehicles, {
-                id: Vehicles.length + 1,
-                ...vehicle
-            }]
+            payload: vehicle
         })
 
         return new Promise((resolve, reject) => resolve());
@@ -101,7 +98,7 @@ export const deleteVehicle = (vehicle) => {
 
         dispatch({
             type : DELETE_VEHICLE,
-            payload: Vehicles.filter((_vehicle) => _vehicle.id !== vehicle.id)
+            payload: vehicle
         })
 
         return new Promise((resolve, reject) => resolve());

@@ -24,13 +24,20 @@ const vehicles = (state = vehiclesState, action) => {
         case VehiclesActions.POST_VEHICLE : {
             return {
                 ...state,
-                vehicles : List(action.payload)
+                vehicles: List([...state.vehicles, {
+                    id: state.vehicles.size + 1,
+                    ...action.payload
+                }])
             }
         }
         case VehiclesActions.DELETE_VEHICLE : {
             return {
                 ...state,
-                vehicles : List(action.payload)
+                vehicles: state.vehicles
+                    && state.vehicles.size > 0
+                    && state.vehicles.filter((vehicle) => (
+                        vehicle.id !== action.payload.id
+                    ))
             }
         }
         case VehiclesActions.RESET_VEHICLES : {
