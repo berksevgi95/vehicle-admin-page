@@ -10,7 +10,8 @@ const vehiclesState = {
     vehicleFilterbar : {
         open : false,
         data : null
-    }
+    },
+    vehicleFilters : null
 }
 
 const vehicles = (state = vehiclesState, action) => {
@@ -79,6 +80,22 @@ const vehicles = (state = vehiclesState, action) => {
                     ...state.vehicleFilterbar,
                     open : false,
                 }
+            }
+        }
+        case VehiclesActions.ADD_VEHICLE_FILTER : {
+            return {
+                ...state,
+                vehicleFilters: action.payload
+            }
+        }
+        case VehiclesActions.DELETE_VEHICLE_FILTER : {
+            return {
+                ...state,
+                vehicleFilters: state.vehicleFilters
+                    && state.vehicleFilters.length > 0
+                    && state.vehicleFilters.filter(
+                        vehicle => vehicle.field !== action.payload.field
+                    )
             }
         }
         default:

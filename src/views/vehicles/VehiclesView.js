@@ -1,8 +1,6 @@
 import React from 'react'
 import {
-    // Table, 
     Icon,
-    Menu,
     Checkbox,
 } from 'semantic-ui-react'
 import * as VehiclesActions from './store/vehicles.actions';
@@ -15,7 +13,8 @@ import { List } from 'immutable';
 import {
     Button,
     BSTheme,
-    Table
+    Table,
+    Chip
 } from 'bs-ui-components'
 
 const VehiclesView = ({
@@ -28,6 +27,8 @@ const VehiclesView = ({
     vehicleFilterbar,
     openVehicleFilterbar,
     deleteVehicle,
+    vehicleFilters,
+    deleteVehicleFilter,
     ...props
 }) => {
 
@@ -119,7 +120,20 @@ const VehiclesView = ({
                 </div>
             </div>
             
-
+            {vehicleFilters && vehicleFilters.length > 0 && (
+                <div className="my-4 flex">
+                    {vehicleFilters.map(filterObj => filterObj && (
+                        <Chip
+                            key={filterObj.field}
+                            className="mr-2 w-auto"
+                            onClose={deleteVehicleFilter.bind(this, filterObj)}
+                        >
+                            {`${filterObj.label}(${filterObj.value})`}
+                        </Chip>
+                    ))}
+                </div>
+            )}
+            
             <Table.Table className="mt-4">
                 <Table.Head>
                     <Table.Row>
@@ -155,7 +169,8 @@ const VehiclesView = ({
                 <Table.Body>
                     {vehicles &&
                         vehicles.size > 0 &&
-                        vehicles.map(vehicle => (
+                        vehicles
+                            .map(vehicle => (
                             <Table.Row
                                 onClick={handleClickRow.bind(this, vehicle)} 
                                 onDoubleClick={handleNavigateDetail} 

@@ -1,110 +1,177 @@
 import React from 'react'
-import { 
-    Sidebar, 
-    Menu, 
-    Form,
-    Button,
-    Input
-} from 'semantic-ui-react'
 import * as VehiclesActions from './store/vehicles.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { useFormik } from 'formik';
 import injectSheet from 'react-jss'
-import Filterbar from '../../components/filterbar/Filterbar';
+import { Input, Button, BSTheme } from 'bs-ui-components';
+import { Formik } from 'formik';
+import _ from 'lodash';
 
 const styles = {
-    sidebar :  {
-        padding : 15,
-        width : '300px !important',
+
+    '@keyframes opacity': {
+        from: { opacity: 0 },
+        to: { opacity: 1 }
     },
+
+    '@keyframes width': {
+        from: { right: -200 },
+        to: { right: 0 }
+    },
+
+    filterArea : {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 1,
+        animation: '$opacity .25s',
+        background: 'rgba(0, 0, 0, 0.38)'
+    },
+
+    filterBar : {
+        right: 0,
+        position: 'absolute',
+        width: 200,
+        height: '100%',
+        background: 'white',
+        animation: '$width .25s'
+    },
+
+    inputArea : {
+        width: '100% !important',
+        minWidth: 'inherit'
+    }
+}
+
+const filterMapping = {
+    brand: 'Brand',
+    modelName: 'Model Name',
 }
 
 const VehiclesViewFilterForm = ({
     classes,
+    vehicleFilters,
     vehicleFilterbar,
     closeVehicleFilterbar,
-    ...props
+    addVehicleFilter,
 }) => {
 
-    const formik = useFormik({
-        initialValues: vehicleFilterbar.data || {
-            brand: '',
-            modelName: '',
-            req: '',
-            req_alter: '',
-        },
-        onSubmit: values => {
-            console.log(values)
-            closeVehicleFilterbar()
-        },
-    });
+    const handleStopPropagation = (e) => {
+        e.stopPropagation();
+    }
 
-    return <Filterbar onHide={closeVehicleFilterbar}>
-        <Form onSubmit={formik.handleSubmit}>
-            <Form.Field
-                control={Input}
-                label='Brand'
-                placeholder='Ex. Ford, Volkswagen, etc.'
-                id="brand"
-            >
-                <input
-                    id="brand"
-                    name="brand"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.brand}
-                />
-            </Form.Field>
-            <Form.Field
-                control={Input}
-                label='Model Name'
-                placeholder='Ex. Focus, Golf, etc.'
-                id="modelName"
-            >
-                <input
-                    id="modelName"
-                    name="modelName"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.modelName}
-                />
-            </Form.Field>
-            <Form.Field
-                control={Input}
-                label='Req'
-                placeholder='joe@schmoe.com'
-                id="req"
-                error={formik.errors.req && {
-                    content: formik.errors.req,
-                    pointing: 'above',
-                }}
-            >
-                <input
-                    id="req"
-                    name="req"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.req}
-                />
-            </Form.Field>
-            <Form.Field
-                control={Input}
-                label='Req Alter'
-                id="req_alter"
-            >
-                <input
-                    id="req_alter"
-                    name="req_alter"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.req_alter}
-                />
-            </Form.Field>
-            <Button type='submit'>Filter</Button>
-            <Button basic onClick={formik.resetForm}>Clear</Button>
-        </Form>
-    </Filterbar>
+    return (
+        <div className={classes.filterArea} onClick={closeVehicleFilterbar}>
+            <div className={classes.filterBar} onClick={handleStopPropagation}>
+                <Formik
+                    initialValues={(
+                        vehicleFilters && Object.assign(
+                            {},
+                            ...vehicleFilters.map((filterObj) => ({
+                                [filterObj.field]: filterObj.value 
+                            }))
+                        )
+                    ) || {
+                        brand: '',
+                        modelName: '',
+                        year: '',
+                        km: '',
+                    }}
+                    onSubmit={(values, formikHelpers) => {
+                        const filterObj = _.pickBy(values);
+                        addVehicleFilter(
+                            !_.isEmpty(filterObj, true) ? 
+                                Object.keys(filterObj).map(f => ({
+                                    label: filterMapping[f],
+                                    field: f,
+                                    value: values[f]
+                                })) : 
+                                null
+                        )
+                        closeVehicleFilterbar()
+                    }}
+                >
+                    {({
+                        values,
+                        isSubmitting,
+                        handleChange,
+                        handleSubmit,
+                    }) => {
+                        return (
+                            <form className="p-4" onSubmit={handleSubmit}>
+                                <h3 className="text-xl mb-4">Vehicle Filter</h3>
+                                
+                                <div className="mb-4">
+                                    <Input
+                                        id="brand"
+                                        name="brand"
+                                        type="text"
+                                        value={values.brand}
+                                        onChange={handleChange}
+                                        placeholder="Ex. Ford, Volkswagen, etc."
+                                        className={classes.inputArea}
+                                    >
+                                        Brand
+                                    </Input>
+                                </div>
+                                <div className="mb-4">
+                                    <Input
+                                        id="modelName"
+                                        name="modelName"
+                                        type="text"
+                                        value={values.modelName}
+                                        onChange={handleChange}
+                                        placeholder="Ex. Focus, Golf, etc."
+                                        className={classes.inputArea}
+                                    >
+                                        Model Name
+                                    </Input>
+                                </div>
+                                <div className="mb-4">
+                                    <Input
+                                        id="year"
+                                        name="year"
+                                        type="number"
+                                        value={values.year}
+                                        onChange={handleChange}
+                                        placeholder="Ex. 2010"
+                                        className={classes.inputArea}
+                                    >
+                                        Year
+                                    </Input>
+                                </div>
+                                <div className="mb-8">
+                                    <Input
+                                        id="km"
+                                        name="km"
+                                        type="number"
+                                        value={values.km}
+                                        placeholder="Ex. 512000"
+                                        onChange={handleChange}
+                                        className={classes.inputArea}
+                                    >
+                                        Km
+                                    </Input>
+                                </div>
+                                
+                                <Button
+                                    className="w-full"
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    theme={BSTheme.SECONDARY}
+                                >
+                                    Submit
+                                </Button>
+
+                            </form>
+                        );
+                    }}
+                </Formik>
+            </div>
+        </div>
+    )
 }
 
 

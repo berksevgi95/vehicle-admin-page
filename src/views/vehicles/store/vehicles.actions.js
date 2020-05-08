@@ -11,6 +11,10 @@ export const CLOSE_VEHICLE_FORM = "CLOSE_VEHICLE_FORM"
 export const OPEN_VEHICLE_FILTERBAR = "OPEN_VEHICLE_FILTERBAR"
 export const CLOSE_VEHICLE_FILTERBAR = "CLOSE_VEHICLE_FILTERBAR"
 
+export const ADD_VEHICLE_FILTER = "ADD_VEHICLE_FILTER"
+export const DELETE_VEHICLE_FILTER = "DELETE_VEHICLE_FILTER"
+
+
 export const getVehicles = () => {
     return (dispatch) => {
         // return get("http://localhost:5500", "/", (response) => {
@@ -133,5 +137,19 @@ export const openVehicleFilterbar = () => {
 export const closeVehicleFilterbar = () => {
     return {
         type : CLOSE_VEHICLE_FILTERBAR
+    }
+}
+
+export const addVehicleFilter = (filter) => {
+    return {
+        type: ADD_VEHICLE_FILTER,
+        payload: filter
+    }
+}
+
+export const deleteVehicleFilter = (filter) => {
+    return {
+        type: DELETE_VEHICLE_FILTER,
+        payload: filter
     }
 }

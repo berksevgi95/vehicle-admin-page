@@ -64,11 +64,16 @@ const styles = {
         }
     },
 
+    filterBar: {
+        right: 0
+    }
+
 }
 
 const Sidebar = ({
     classes,
     children,
+    filterBar,
     ...props
 }) => {
 
@@ -88,7 +93,8 @@ const Sidebar = ({
     return (
         <div className={classNames(classes.root, {
             [classes.collapsed]: !sidebar,
-            [classes.mobile]: mobile
+            [classes.mobile]: mobile,
+            [classes.filterBar]: filterBar
         })}>
 
             <div className={classes.logoContainer}>
@@ -125,6 +131,4 @@ const Sidebar = ({
     )
 }
 
-export default injectSheet(styles)(
-    Sidebar
-)
+export default injectSheet(styles)(Sidebar)
