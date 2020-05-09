@@ -1,12 +1,14 @@
 export default [{
     icon : 'car',
-    title : 'Vehicles',
-    description : 'List all vehicles exist in system',
+    title : 'vehicles',
+    tag: 'vehicles,araçlar,list',
+    description : 'vehicles.list.description',
     action : (props) => props.history.push('/vehicles')
 },{
     icon : 'car',
-    title : 'Add Vehicle',
-    description : 'Define new vehicle',
+    title : 'vehicles.add',
+    tag: 'vehicles,araçlar,ekleme,add',
+    description : 'vehicles.add.description',
     action : (props) => Promise.resolve(
         props.history.push('/vehicles')
     ).then(() => setTimeout(() => {

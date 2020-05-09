@@ -5,13 +5,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import injectSheet from 'react-jss'
 import { Formik } from "formik";
-
-import {
+import { 
     Dialog,
     BSTheme,
     Input,
-    Button
+    Button,
+    EMessageTypes
 } from 'bs-ui-components'
+import { FormattedMessage } from 'react-intl';
 
 
 const styles = {
@@ -25,17 +26,19 @@ const styles = {
 }
 
 const VehiclesViewForm = ({
-    children,
     postVehicle,
     addVehicleDialog,
     closeVehicleForm,
     classes,
-    ...props
 }) => {
 
     return (
         <Dialog
-            title="Dialog"
+            title={
+                addVehicleDialog && addVehicleDialog.data ? 
+                    <FormattedMessage id="vehicles.edit" /> :
+                    <FormattedMessage id="vehicles.add" />
+            }
             closeOnEsc
             closeButton
             open
@@ -51,42 +54,49 @@ const VehiclesViewForm = ({
                     km: '',
                 }}
                 onSubmit={(values, formikHelpers) => {
-                    postVehicle(values).then(() => {
-                        formikHelpers.resetForm()
-                        closeVehicleForm()
-                    })
+                    postVehicle(values)
+                        .then(() => {
+                            window.messageRef.fire({
+                                message: <FormattedMessage id="vehicles.add.success" />,
+                                type: EMessageTypes.SUCCESS,
+                                timeout: 5000
+                            })
+                            formikHelpers.resetForm()
+                            closeVehicleForm()
+                        })
+                        .catch((exception) => {
+                            window.messageRef.fire({
+                                message: exception.error,
+                                type: EMessageTypes.ERROR,
+                                timeout: 5000
+                            })
+                        })
                 }}
                 validate={({
                     brand,
                     modelName,
                     year,
-                    km
                 }) => {
                     const errors = {};
                     if (!brand) {
-                        errors.brand = 'Required';
+                        errors.brand = <FormattedMessage id="required" />;
                     }
                     if (!modelName) {
-                        errors.modelName = 'Required';
+                        errors.modelName = <FormattedMessage id="required" />;
                     }
                     if (!year) {
-                        errors.year = 'Required';
+                        errors.year = <FormattedMessage id="required" />;
                     }
                     return errors;
                 }}
             >
-                {props => {
-                    const {
-                        values,
-                        touched,
-                        errors,
-                        dirty,
-                        isSubmitting,
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        handleReset
-                    } = props;
+                {({
+                    values,
+                    errors,
+                    isSubmitting,
+                    handleChange,
+                    handleSubmit,
+                }) => {
                     return (
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
@@ -99,7 +109,7 @@ const VehiclesViewForm = ({
                                     placeholder="Ex. Ford, Volkswagen, etc."
                                     errorMsg={errors.brand}
                                 >
-                                    Brand
+                                    <FormattedMessage id="vehicles.brand" />
                                 </Input>
                             </div>
                             <div className="mb-4">
@@ -112,7 +122,7 @@ const VehiclesViewForm = ({
                                     placeholder="Ex. Focus, Golf, etc."
                                     errorMsg={errors.modelName}
                                 >
-                                    Model Name
+                                    <FormattedMessage id="vehicles.modelName" />
                                 </Input>
                             </div>
                             <div className="mb-4">
@@ -125,7 +135,7 @@ const VehiclesViewForm = ({
                                     placeholder="Ex. 2010"
                                     errorMsg={errors.year}
                                 >
-                                    Year
+                                    <FormattedMessage id="vehicles.year" />
                                 </Input>
                             </div>
                             <div className="mb-8">
@@ -137,7 +147,7 @@ const VehiclesViewForm = ({
                                     placeholder="Ex. 512000"
                                     onChange={handleChange}
                                 >
-                                    Km
+                                    <FormattedMessage id="vehicles.km" />
                                 </Input>
                             </div>
                             
@@ -148,7 +158,7 @@ const VehiclesViewForm = ({
                                     className="outline"
                                     onClick={closeVehicleForm}
                                 >
-                                    Cancel
+                                    <FormattedMessage id="cancel" />
                                 </Button>
                                 <Button
                                     type="submit"

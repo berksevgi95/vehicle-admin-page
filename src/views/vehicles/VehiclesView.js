@@ -14,8 +14,10 @@ import {
     Button,
     BSTheme,
     Table,
-    Chip
+    Chip,
+    EMessageTypes
 } from 'bs-ui-components'
+import { FormattedMessage } from 'react-intl';
 
 const VehiclesView = ({
     vehicles,
@@ -29,7 +31,6 @@ const VehiclesView = ({
     deleteVehicle,
     vehicleFilters,
     deleteVehicleFilter,
-    ...props
 }) => {
 
     const [selected, setSelected] = React.useState(null);
@@ -70,12 +71,28 @@ const VehiclesView = ({
 
     const handleDeleteVehicle = (vehicle) => {
         deleteVehicle(vehicle)
+            .then(() => {
+                window.messageRef.fire({
+                    message: <FormattedMessage id="vehicles.delete.success" />,
+                    type: EMessageTypes.SUCCESS,
+                    timeout: 5000
+                })
+            })
+            .catch((exception) => {
+                window.messageRef.fire({
+                    message: exception.error,
+                    type: EMessageTypes.ERROR,
+                    timeout: 5000
+                })
+            })
     }
 
     return (
         <div className="fadein-animation p-4">
             <div className="flex justify-between">
-                <h3 className="text-2xl">Vehicles</h3>
+                <h3 className="text-2xl">
+                    <FormattedMessage id="vehicles" />
+                </h3>
                 <div className="flex">
                     {selected ? 
                     <React.Fragment>
@@ -94,7 +111,7 @@ const VehiclesView = ({
                             onClick={openVehicleForm.bind(this, null)}
                         >
                             <Icon name="add"></Icon>
-                            Add Vehicle
+                            <FormattedMessage id="vehicles.add" />
                         </Button>
                         <Button
                             className="mr-2 hidden sm:block"
@@ -149,16 +166,16 @@ const VehiclesView = ({
                             id
                         </Table.Title>
                         <Table.Title>
-                            Brand
+                            <FormattedMessage id="vehicles.brand" />
                         </Table.Title>
                         <Table.Title>
-                            Model Name
+                            <FormattedMessage id="vehicles.modelName" />
                         </Table.Title>
                         <Table.Title>
-                            Year
+                            <FormattedMessage id="vehicles.year" />
                         </Table.Title>
                         <Table.Title>
-                            Km
+                            <FormattedMessage id="vehicles.km" />
                         </Table.Title>
                         {!selected && (
                             <Table.Title/>

@@ -6,6 +6,8 @@ import injectSheet from 'react-jss'
 import { Input, Button, BSTheme } from 'bs-ui-components';
 import { Formik } from 'formik';
 import _ from 'lodash';
+import messages from '../../configs/i18n'
+import { FormattedMessage } from 'react-intl';
 
 const styles = {
 
@@ -45,15 +47,11 @@ const styles = {
     }
 }
 
-const filterMapping = {
-    brand: 'Brand',
-    modelName: 'Model Name',
-}
 
 const VehiclesViewFilterForm = ({
     classes,
+    lang,
     vehicleFilters,
-    vehicleFilterbar,
     closeVehicleFilterbar,
     addVehicleFilter,
 }) => {
@@ -84,7 +82,7 @@ const VehiclesViewFilterForm = ({
                         addVehicleFilter(
                             !_.isEmpty(filterObj, true) ? 
                                 Object.keys(filterObj).map(f => ({
-                                    label: filterMapping[f],
+                                    label: messages[lang][`vehicles.${f}`],
                                     field: f,
                                     value: values[f]
                                 })) : 
@@ -101,7 +99,9 @@ const VehiclesViewFilterForm = ({
                     }) => {
                         return (
                             <form className="p-4" onSubmit={handleSubmit}>
-                                <h3 className="text-xl mb-4">Vehicle Filter</h3>
+                                <h3 className="text-xl mb-4">
+                                    <FormattedMessage id="vehicles.filter" />
+                                </h3>
                                 
                                 <div className="mb-4">
                                     <Input
@@ -113,7 +113,7 @@ const VehiclesViewFilterForm = ({
                                         placeholder="Ex. Ford, Volkswagen, etc."
                                         className={classes.inputArea}
                                     >
-                                        Brand
+                                        <FormattedMessage id="vehicles.brand" />
                                     </Input>
                                 </div>
                                 <div className="mb-4">
@@ -126,7 +126,7 @@ const VehiclesViewFilterForm = ({
                                         placeholder="Ex. Focus, Golf, etc."
                                         className={classes.inputArea}
                                     >
-                                        Model Name
+                                        <FormattedMessage id="vehicles.modelName" />
                                     </Input>
                                 </div>
                                 <div className="mb-4">
@@ -139,7 +139,7 @@ const VehiclesViewFilterForm = ({
                                         placeholder="Ex. 2010"
                                         className={classes.inputArea}
                                     >
-                                        Year
+                                        <FormattedMessage id="vehicles.year" />
                                     </Input>
                                 </div>
                                 <div className="mb-8">
@@ -152,7 +152,7 @@ const VehiclesViewFilterForm = ({
                                         onChange={handleChange}
                                         className={classes.inputArea}
                                     >
-                                        Km
+                                        <FormattedMessage id="vehicles.km" />
                                     </Input>
                                 </div>
                                 
@@ -176,7 +176,10 @@ const VehiclesViewFilterForm = ({
 
 
 const mapStateToProps = (state, ownProps) => {
-    return { ...state.vehicles }
+    return {
+        ...state.vehicles,
+        ...state.app
+    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

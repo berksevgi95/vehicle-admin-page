@@ -1,6 +1,7 @@
 import * as AppActions from './app.actions'
 
 const appState = {
+    lang: 'en',
     layout : 'layout1',
 }
 
@@ -10,6 +11,12 @@ const app = (state = appState, action) => {
             return {
                 ...state,
                 layout : action.payload
+            }
+        }
+        case AppActions.CHANGE_LANGUAGE : {
+            return {
+                ...state,
+                lang: action.payload
             }
         }
         default:

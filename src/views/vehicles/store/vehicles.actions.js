@@ -1,5 +1,4 @@
 // import { get, post } from '../../../utils/request'
-import { EMessageTypes } from 'bs-ui-components'
 import { Vehicles } from '../../../@fake-db'
 
 export const GET_VEHICLES = "GET_VEHICLES"
@@ -59,11 +58,6 @@ export const postVehicle = (vehicle) => {
         //     })
         // })
 
-        window.messageRef.fire({
-            message: "Vehicle has been added",
-            type: EMessageTypes.SUCCESS,
-            timeout: 5000
-        })
         dispatch({
             type : POST_VEHICLE,
             payload: vehicle
@@ -93,12 +87,6 @@ export const deleteVehicle = (vehicle) => {
         //         timeout: 5000
         //     })
         // })
-
-        window.messageRef.fire({
-            message: "Vehicle has been deleted",
-            type: EMessageTypes.SUCCESS,
-            timeout: 5000
-        })
 
         dispatch({
             type : DELETE_VEHICLE,

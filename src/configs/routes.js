@@ -22,7 +22,7 @@ export default [{
         component: VehiclesView,
         exact : true,
         icon: <Icon name='car' className="m-icon" />,
-        title: 'Vehicles'
+        title: 'vehicles'
     }, {
         id : 3,
         path: "/vehicles/detail",
@@ -32,7 +32,7 @@ export default [{
         path: "/settings",
         component: SettingsView,
         icon: <Icon name='settings' className="m-icon" />,
-        title: 'Settings'
+        title: 'settings'
     }, {
         id : 5,
         path: "/search",

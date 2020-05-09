@@ -8,6 +8,7 @@ import injectSheet from 'react-jss'
 import { Input } from 'bs-ui-components';
 import { Image } from 'semantic-ui-react';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 
 const styles = {
     header :  {
@@ -50,7 +51,7 @@ const Header = ({
                                     {route.icon}
                                 </div>
                                 <span className="truncate">
-                                    {route.title}
+                                    <FormattedMessage id={route.title} />
                                 </span>
                             </Link>
                         </div>

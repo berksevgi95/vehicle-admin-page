@@ -2,13 +2,16 @@ import React from 'react'
 import search from '../../configs/search'
 import { List, BSTheme } from 'bs-ui-components'
 import { Icon } from 'semantic-ui-react'
+import { FormattedMessage } from 'react-intl'
 
 const SearchView = ({
     ...props
 }) => {
     return (
         <div className="p-4">
-            <h3 className="text-2xl">Search</h3>
+            <h3 className="text-2xl">
+                <FormattedMessage id="search" />
+            </h3>
             <List.List className="mt-4">
                 {search &&
                     search.length > 0 &&
@@ -20,8 +23,8 @@ const SearchView = ({
                                 icon={
                                     <Icon name={e.icon} size="big"/>
                                 }
-                                title={e.title}
-                                subtitle={e.description}
+                                title={<FormattedMessage id={e.title} />}
+                                subtitle={<FormattedMessage id={e.description} />}
                                 actions={[
                                     <Icon name={e.icon} size="arrow right"/>
                                 ]}

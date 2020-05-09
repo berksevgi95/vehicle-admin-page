@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import routes from '../../configs/routes';
 import { useMediaQuery } from 'react-responsive'
+import { FormattedMessage } from 'react-intl'
 
 const styles = {
 
@@ -119,7 +120,7 @@ const Sidebar = ({
                                     {route.icon}
                                 </div>
                                 <span className="truncate text-white">
-                                    {route.title}
+                                    <FormattedMessage id={route.title} />
                                 </span>
                             </Link>
                         </div>
