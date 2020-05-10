@@ -45,8 +45,8 @@ const VehiclesView = ({
         selected ? setSelected(null) : setSelected(List())
     }
 
-    const handleNavigateDetail = () => {
-        !selected && history && history.push('vehicles/detail')
+    const handleNavigateDetail = (vehicle) => () => {
+        !selected && history.push(`vehicles/${vehicle.id}`)
     }
 
     const isVehicleChecked = (vehicle) => {
@@ -190,7 +190,7 @@ const VehiclesView = ({
                             .map(vehicle => (
                             <Table.Row
                                 onClick={handleClickRow.bind(this, vehicle)} 
-                                onDoubleClick={handleNavigateDetail} 
+                                onDoubleClick={handleNavigateDetail(vehicle)} 
                                 key={vehicle.id}
                             >
                                 {selected &&
@@ -215,14 +215,10 @@ const VehiclesView = ({
                                 </Table.Cell>
                                 {!selected && 
                                     <Table.Cell>
-                                        <Button 
-                                            onClick={openVehicleForm.bind(this, vehicle)}
-                                        >
+                                        <Button onClick={openVehicleForm.bind(this, vehicle)}>
                                             <Icon className="m-icon" name="edit"></Icon>
                                         </Button>
-                                        <Button
-                                            onClick={handleDeleteVehicle.bind(this, vehicle)}
-                                        >
+                                        <Button onClick={handleDeleteVehicle.bind(this, vehicle)}>
                                             <Icon className="m-icon" name="delete"></Icon>
                                         </Button>
                                     </Table.Cell>

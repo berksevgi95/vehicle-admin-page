@@ -12,6 +12,7 @@ import OlSourceOSM from "ol/source/osm";
 // import OlGeomPoint from 'ol/geom/point'
 import OlSourceVector from 'ol/source/vector'
 import OlLayerVector from 'ol/layer/vector'
+import OlControl from 'ol/control'
 // import OlProj from 'ol/proj'
 
 import Graph from '../Graph';
@@ -43,7 +44,12 @@ const Map = ({
             view: new OlView({
                 center: [0, 0],
                 zoom: 3
-            })
+            }),
+            controls : new OlControl.defaults({
+                attribution : false,
+                zoom : false,
+                rotate: false
+            }),
         });
         olmap.setTarget(id);
 

@@ -6,34 +6,164 @@ export const Status = {
 
 export const Vehicles = [{
     id: 1,
+    plateNumber: '06 AA 4564',
+    img: 'https://www.motortrend.com/uploads/sites/10/2017/10/2018-ford-focus-se-sedan-angular-front.png',
     brand: 'Ford',
     modelName: 'Focus',
+    modelType: '2.0 T',
     year: 2010,
-    km: 410000
-},{
+    km: 410000,
+    transmission: 'Manual',
+    cubic: '1998cc',
+    horsepower: 136,
+    fuelType: 'Gasoline',
+    events: [{
+        type: 'Sürücü Değişikliği',
+        value: 'Doğan Vural',
+        description: '70kmlik mesafe tamamlandı'
+    },{
+        type: 'Yakıt Alımı',
+        value: '5lt',
+    },{
+        type: 'Trafik Cezası',
+        value: '700TL',
+        description: 'Dumlupınar Bulvarında aşırı hız'
+    },{
+        type: 'Rutin Bakım',
+        value: '30000 KM',
+        description: 'Yağ, benzin filtresi ve fren diskleri değiştirildi'
+    },{
+        type: 'Trafik Muayenesi',
+        value: '35000 KM',
+    }]
+}, {
     id: 2,
-    brand: 'Peugeot',
-    modelName: '308',
-    year: 2011,
-    km: 32000
-},{
-    id: 3,
-    brand: 'Kia',
-    modelName: 'Ceed',
-    year: 2009,
-    km: 9910
-},{
-    id: 4,
-    brand: 'Kia',
-    modelName: 'Ceed',
-    year: 2009,
-    km: 9910
-},{
-    id: 5,
+    plateNumber: '06 AA 4314',
+    img: 'https://www.motortrend.com/uploads/sites/10/2019/10/2020-bmw-2-series-230i-sport-line-rwd-coupe-angular-front.png',
     brand: 'BMW',
-    modelName: '320d',
+    modelName: '218i',
+    modelType: '1.5L I3 turbo',
+    year: 2015,
+    km: 10000,
+    transmission: 'Automatic',
+    cubic: '1198cc',
+    horsepower: 101,
+    fuelType: 'Gasoline',
+    events: [{
+        type: 'Sürücü Değişikliği',
+        value: 'Doğan Vural',
+        description: '70kmlik mesafe tamamlandı'
+    },{
+        type: 'Yakıt Alımı',
+        value: '5lt',
+    },{
+        type: 'Trafik Cezası',
+        value: '700TL',
+        description: 'Dumlupınar Bulvarında aşırı hız'
+    },{
+        type: 'Rutin Bakım',
+        value: '30000 KM',
+        description: 'Yağ, benzin filtresi ve fren diskleri değiştirildi'
+    },{
+        type: 'Trafik Muayenesi',
+        value: '35000 KM',
+    }]
+}, {
+    id: 3,
+    plateNumber: '06 AA 4266',
+    img: 'https://www.motortrend.com/uploads/sites/10/2020/02/2020-audi-a3-premium-sedan-angular-front.png',
+    brand: 'Audi',
+    modelName: 'A3',
+    modelType: '2.0 TDI',
+    year: 2015,
+    km: 10000,
+    transmission: 'Automatic',
+    cubic: '1998cc',
+    horsepower: 101,
+    fuelType: 'Diesel',
+    events: [{
+        type: 'Sürücü Değişikliği',
+        value: 'Doğan Vural',
+        description: '70kmlik mesafe tamamlandı'
+    },{
+        type: 'Yakıt Alımı',
+        value: '5lt',
+    },{
+        type: 'Trafik Cezası',
+        value: '700TL',
+        description: 'Dumlupınar Bulvarında aşırı hız'
+    },{
+        type: 'Rutin Bakım',
+        value: '30000 KM',
+        description: 'Yağ, benzin filtresi ve fren diskleri değiştirildi'
+    },{
+        type: 'Trafik Muayenesi',
+        value: '35000 KM',
+    }]
+}, {
+    id: 4,
+    plateNumber: '06 AA 4078',
+    img: 'https://www.motortrend.com/uploads/sites/10/2019/06/2019-nissan-versa-note-sv-5door-hatchback-angular-front.png',
+    brand: 'Nissan',
+    modelName: 'Versa Note',
+    modelType: '2.0',
+    year: 2019,
+    km: 10000,
+    transmission: 'Automatic',
+    cubic: '1198cc',
+    horsepower: 101,
+    fuelType: 'Gasoline',
+    events: [{
+        type: 'Sürücü Değişikliği',
+        value: 'Doğan Vural',
+        description: '70kmlik mesafe tamamlandı'
+    },{
+        type: 'Yakıt Alımı',
+        value: '5lt',
+    },{
+        type: 'Trafik Cezası',
+        value: '700TL',
+        description: 'Dumlupınar Bulvarında aşırı hız'
+    },{
+        type: 'Rutin Bakım',
+        value: '30000 KM',
+        description: 'Yağ, benzin filtresi ve fren diskleri değiştirildi'
+    },{
+        type: 'Trafik Muayenesi',
+        value: '35000 KM',
+    }]
+}, {
+    id: 5,
+    plateNumber: '06 AA 4455',
+    img: 'https://www.motortrend.com/uploads/sites/10/2017/09/2018-toyota-prius-c-one-hatchback-angular-front.png',
+    brand: 'Toyota',
+    modelName: 'Prius C',
+    modelType: '1.5',
     year: 2020,
-    km: 900
+    km: 10000,
+    transmission: 'Automatic',
+    cubic: '1198cc',
+    horsepower: 101,
+    fuelType: 'Gasoline',
+    events: [{
+        type: 'Sürücü Değişikliği',
+        value: 'Doğan Vural',
+        description: '70kmlik mesafe tamamlandı'
+    },{
+        type: 'Yakıt Alımı',
+        value: '5lt',
+    },{
+        type: 'Trafik Cezası',
+        value: '700TL',
+        description: 'Dumlupınar Bulvarında aşırı hız'
+    },{
+        type: 'Rutin Bakım',
+        value: '30000 KM',
+        description: 'Yağ, benzin filtresi ve fren diskleri değiştirildi'
+    },{
+        type: 'Trafik Muayenesi',
+        value: '35000 KM',
+    }]
 }]
 
 export const Drivers = [{

@@ -20,8 +20,18 @@ const tr = {
   "vehicles.filter": 'Araç Filtreleme',
   "vehicles.brand" : 'Marka',
   "vehicles.modelName" : 'Model Adı',
+  "vehicles.modelType" : 'Model Tipi',
   "vehicles.year" : 'Yıl',
-  "vehicles.km" : 'Km'
+  "vehicles.km" : 'Km',
+  "vehicles.plateNumber": 'Plaka No.',
+  "vehicles.transmission": 'Şanzıman',
+  "vehicles.transmission.manual": 'Manuel',
+  "vehicles.transmission.automatic": 'Otomatik',
+  "vehicles.cubic": 'Motor hacmi',
+  "vehicles.horsepower": "Beygir gücü (HP)",
+  "vehicles.fuelType": 'Yakıt Tipi',
+  "vehicles.fuelType.gasoline": 'Benzin',
+  "vehicles.fuelType.diesel": 'Dizel',
 }
 
 const en = {
@@ -46,8 +56,18 @@ const en = {
   "vehicles.filter": 'Vehicle Filter',
   "vehicles.brand" : 'Brand',
   "vehicles.modelName" : 'Model Name',
+  "vehicles.modelType" : 'Model Type',
   "vehicles.year" : 'Year',
-  "vehicles.km" : 'Km'
+  "vehicles.km" : 'Km',
+  "vehicles.plateNumber": 'Plate No.',
+  "vehicles.transmission": 'Transmission',
+  "vehicles.transmission.manual": 'Manual',
+  "vehicles.transmission.automatic": 'Automatic',
+  "vehicles.cubic": 'Engine capacity',
+  "vehicles.horsepower": "Horsepower (HP)",
+  "vehicles.fuelType": 'Fuel Type',
+  "vehicles.fuelType.gasoline": 'Gasoline',
+  "vehicles.fuelType.diesel": 'Diesel',
 }
 
 export default {tr, en}

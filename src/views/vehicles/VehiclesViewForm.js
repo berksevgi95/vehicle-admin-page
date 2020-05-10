@@ -10,7 +10,8 @@ import {
     BSTheme,
     Input,
     Button,
-    EMessageTypes
+    EMessageTypes,
+    Select
 } from 'bs-ui-components'
 import { FormattedMessage } from 'react-intl';
 
@@ -22,6 +23,9 @@ const styles = {
                 overflow: 'inherit'
             }
         }
+    },
+    selectLabels: {
+        marginBottom : '5px !important'
     }
 }
 
@@ -52,6 +56,8 @@ const VehiclesViewForm = ({
                     modelName: '',
                     year: '',
                     km: '',
+                    transmission: 'Manual',
+                    fuelType: 'Gasoline'
                 }}
                 onSubmit={(values, formikHelpers) => {
                     postVehicle(values)
@@ -98,57 +104,142 @@ const VehiclesViewForm = ({
                     handleSubmit,
                 }) => {
                     return (
-                        <form onSubmit={handleSubmit}>
-                            <div className="mb-4">
-                                <Input
-                                    id="brand"
-                                    name="brand"
-                                    type="text"
-                                    value={values.brand}
-                                    onChange={handleChange}
-                                    placeholder="Ex. Ford, Volkswagen, etc."
-                                    errorMsg={errors.brand}
-                                >
-                                    <FormattedMessage id="vehicles.brand" />
-                                </Input>
-                            </div>
-                            <div className="mb-4">
-                                <Input
-                                    id="modelName"
-                                    name="modelName"
-                                    type="text"
-                                    value={values.modelName}
-                                    onChange={handleChange}
-                                    placeholder="Ex. Focus, Golf, etc."
-                                    errorMsg={errors.modelName}
-                                >
-                                    <FormattedMessage id="vehicles.modelName" />
-                                </Input>
-                            </div>
-                            <div className="mb-4">
-                                <Input
-                                    id="year"
-                                    name="year"
-                                    type="number"
-                                    value={values.year}
-                                    onChange={handleChange}
-                                    placeholder="Ex. 2010"
-                                    errorMsg={errors.year}
-                                >
-                                    <FormattedMessage id="vehicles.year" />
-                                </Input>
-                            </div>
-                            <div className="mb-8">
-                                <Input
-                                    id="km"
-                                    name="km"
-                                    type="number"
-                                    value={values.km}
-                                    placeholder="Ex. 512000"
-                                    onChange={handleChange}
-                                >
-                                    <FormattedMessage id="vehicles.km" />
-                                </Input>
+                        <form onSubmit={handleSubmit} className="w-full">
+                            <div className="flex flex-col sm:flex-row w-full">
+                                <div className="w-full sm:w-1/3">
+                                    <img
+                                        className="w-full mb-4 sm:mb-0"
+                                        src={values.img || 'assets/images/no_image.svg'}
+                                    />
+                                </div>
+                                <div className="w-full flex flex-col sm:flex-row sm:w-2/3">
+
+                                    <div className="w-1/2 pl-4">
+                                        <div className="mb-4">
+                                            <Input
+                                                id="brand"
+                                                name="brand"
+                                                type="text"
+                                                className="w-full"
+                                                value={values.brand}
+                                                onChange={handleChange}
+                                                placeholder="Ex. Ford, Volkswagen, etc."
+                                                errorMsg={errors.brand}
+                                            >
+                                                <FormattedMessage id="vehicles.brand" />
+                                            </Input>
+                                        </div>
+                                        <div className="mb-4">
+                                            <Input
+                                                id="modelName"
+                                                name="modelName"
+                                                type="text"
+                                                className="w-full"
+                                                value={values.modelName}
+                                                onChange={handleChange}
+                                                placeholder="Ex. Focus, Golf, etc."
+                                                errorMsg={errors.modelName}
+                                            >
+                                                <FormattedMessage id="vehicles.modelName" />
+                                            </Input>
+                                        </div>
+                                        <div className="mb-4">
+                                            <Input
+                                                id="year"
+                                                name="year"
+                                                type="number"
+                                                className="w-full"
+                                                value={values.year}
+                                                onChange={handleChange}
+                                                placeholder="Ex. 2010"
+                                                errorMsg={errors.year}
+                                            >
+                                                <FormattedMessage id="vehicles.year" />
+                                            </Input>
+                                        </div>
+                                        <div className="mb-8">
+                                            <Input
+                                                id="km"
+                                                name="km"
+                                                type="number"
+                                                className="w-full"
+                                                value={values.km}
+                                                placeholder="Ex. 512000"
+                                                onChange={handleChange}
+                                            >
+                                                <FormattedMessage id="vehicles.km" />
+                                            </Input>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-1/2 pl-4">
+                                        <div className="mb-4">
+                                            <div className={classes.selectLabels}>
+                                                <FormattedMessage id="vehicles.transmission" />
+                                            </div>
+                                            <Select
+                                                id="transmission"
+                                                name="transmission"
+                                                className="w-full"
+                                                value={values.transmission}
+                                                options={[{
+                                                    label: <FormattedMessage id="vehicles.transmission.manual" />,
+                                                    value: 'Manual'
+                                                }, {
+                                                    label: <FormattedMessage id="vehicles.transmission.automatic" />,
+                                                    value: 'Automatic'
+                                                }]}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <div className="mb-4">
+                                            <Input
+                                                id="cubic"
+                                                name="cubic"
+                                                className="w-full"
+                                                type="text"
+                                                value={values.cubic}
+                                                onChange={handleChange}
+                                                placeholder="Ex. 1299cc"
+                                            >
+                                                <FormattedMessage id="vehicles.cubic" />
+                                            </Input>
+                                        </div>
+                                        <div className="mb-4">
+                                            <Input
+                                                id="horsepower"
+                                                name="horsepower"
+                                                className="w-full"
+                                                type="number"
+                                                value={values.horsepower}
+                                                onChange={handleChange}
+                                                placeholder="Ex. 130HP"
+                                            >
+                                                <FormattedMessage id="vehicles.horsepower" />
+                                            </Input>
+                                        </div>
+                                        <div className="mb-8">
+                                            <div className={classes.selectLabels}>
+                                                <FormattedMessage id="vehicles.fuelType" />
+                                            </div>
+                                            <Select
+                                                id="fuelType"
+                                                name="fuelType"
+                                                className="w-full"
+                                                value={values.fuelType}
+                                                options={[{
+                                                    label: <FormattedMessage id="vehicles.fuelType.gasoline" />,
+                                                    value: 'Gasoline'
+                                                }, {
+                                                    label: <FormattedMessage id="vehicles.fuelType.diesel" />,
+                                                    value: 'Diesel'
+                                                }]}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             
 

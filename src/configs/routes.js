@@ -25,7 +25,7 @@ export default [{
         title: 'vehicles'
     }, {
         id : 3,
-        path: "/vehicles/detail",
+        path: "/vehicles/:id",
         component: VehiclesDetailView,
     }, {
         id : 4,
