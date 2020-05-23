@@ -3,6 +3,7 @@ import { Vehicles } from '../../../@fake-db'
 
 export const GET_VEHICLES = "GET_VEHICLES"
 export const POST_VEHICLE = "POST_VEHICLE"
+export const EDIT_VEHICLE = "EDIT_VEHICLE"
 export const DELETE_VEHICLE = "DELETE_VEHICLE"
 export const RESET_VEHICLES = "RESET_VEHICLES"
 export const OPEN_VEHICLE_FORM = "OPEN_VEHICLE_FORM"
@@ -61,6 +62,36 @@ export const postVehicle = (vehicle) => {
         dispatch({
             type : POST_VEHICLE,
             payload: vehicle
+        })
+
+        return new Promise((resolve, reject) => resolve());
+    }
+}
+
+export const editVehicle = (id, vehicle) => {
+    return (dispatch) => {
+        // return post("http://localhost:5500", "/", vehicle, (response) => {
+        //     dispatch({
+        //         type : POST_VEHICLE,
+        //         payload : response
+        //     })
+        //     window.messageRef.fire({
+        //         message: "Vehicle has been added",
+        //         type: EMessageTypes.SUCCESS,
+        //         timeout: 5000
+        //     })
+        //     return new Promise((resolve, reject) => resolve(response))
+        // }, (exception) => {
+        //     window.messageRef.fire({
+        //         message: exception.error,
+        //         type: EMessageTypes.ERROR,
+        //         timeout: 5000
+        //     })
+        // })
+
+        dispatch({
+            type : EDIT_VEHICLE,
+            payload: { id, vehicle }
         })
 
         return new Promise((resolve, reject) => resolve());

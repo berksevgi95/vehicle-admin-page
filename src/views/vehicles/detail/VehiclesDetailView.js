@@ -106,6 +106,7 @@ import * as VehiclesActions from '../store/vehicles.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Icon } from 'semantic-ui-react';
+import Image from '../../../components/image/Image';
 
 const styles = {
     
@@ -193,7 +194,7 @@ const VehiclesDetailView = ({
                     </div>
                     <div className={classes.card}>
                         <div className="w-1/3">
-                            <img src={vehicle.img} />
+                            <Image src={vehicle.img} />
                         </div>
                         <div className="w-2/3 pl-3">
                             <div className={classNames(classes.color, "mb-1")}>

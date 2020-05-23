@@ -87,6 +87,28 @@ const VehiclesView = ({
             })
     }
 
+    const handleListVehicles = () => {
+        if (vehicleFilters && vehicleFilters.length > 0) {
+            if (vehicleFilters.length > 1) {
+                return vehicleFilters.reduce((filtered, nextFilter, index) => {
+                    if (index === 1) {
+                        return vehicles
+                            .filter(vehicle => vehicle[filtered.field].toString().toLowerCase() === filtered.value.toLowerCase())
+                            .filter(vehicle => vehicle[nextFilter.field].toString().toLowerCase() === nextFilter.value.toLowerCase())
+                    } else {
+                        return filtered
+                            .filter(vehicle => vehicle[nextFilter.field].toString().toLowerCase() === nextFilter.value.toLowerCase())
+                    }
+                })
+            } else {
+                return vehicles
+                    .filter(vehicle => vehicle[vehicleFilters[0].field].toString().toLowerCase() === vehicleFilters[0].value.toLowerCase())
+            }
+        } else {
+            return vehicles
+        }
+    }
+
     return (
         <div className="fadein-animation p-4">
             <div className="flex justify-between">
@@ -186,7 +208,7 @@ const VehiclesView = ({
                 <Table.Body>
                     {vehicles &&
                         vehicles.size > 0 &&
-                        vehicles
+                        handleListVehicles()
                             .map(vehicle => (
                             <Table.Row
                                 onClick={handleClickRow.bind(this, vehicle)} 

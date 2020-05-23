@@ -14,6 +14,7 @@ import {
     Select
 } from 'bs-ui-components'
 import { FormattedMessage } from 'react-intl';
+import Image from '../../components/image/Image';
 
 
 const styles = {
@@ -32,6 +33,7 @@ const styles = {
 const VehiclesViewForm = ({
     postVehicle,
     addVehicleDialog,
+    editVehicle,
     closeVehicleForm,
     classes,
 }) => {
@@ -60,7 +62,8 @@ const VehiclesViewForm = ({
                     fuelType: 'Gasoline'
                 }}
                 onSubmit={(values, formikHelpers) => {
-                    postVehicle(values)
+                    if (addVehicleDialog && addVehicleDialog.data) {
+                        editVehicle(addVehicleDialog.data.id, values)
                         .then(() => {
                             window.messageRef.fire({
                                 message: <FormattedMessage id="vehicles.add.success" />,
@@ -77,6 +80,25 @@ const VehiclesViewForm = ({
                                 timeout: 5000
                             })
                         })
+                    } else {
+                        postVehicle(values)
+                        .then(() => {
+                            window.messageRef.fire({
+                                message: <FormattedMessage id="vehicles.add.success" />,
+                                type: EMessageTypes.SUCCESS,
+                                timeout: 5000
+                            })
+                            formikHelpers.resetForm()
+                            closeVehicleForm()
+                        })
+                        .catch((exception) => {
+                            window.messageRef.fire({
+                                message: exception.error,
+                                type: EMessageTypes.ERROR,
+                                timeout: 5000
+                            })
+                        })
+                    }
                 }}
                 validate={({
                     brand,
@@ -107,9 +129,9 @@ const VehiclesViewForm = ({
                         <form onSubmit={handleSubmit} className="w-full">
                             <div className="flex flex-col sm:flex-row w-full">
                                 <div className="w-full sm:w-1/3">
-                                    <img
+                                    <Image
+                                        src={values.img}
                                         className="w-full mb-4 sm:mb-0"
-                                        src={values.img || 'assets/images/no_image.svg'}
                                     />
                                 </div>
                                 <div className="w-full flex flex-col sm:flex-row sm:w-2/3">

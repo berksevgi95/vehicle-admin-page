@@ -31,6 +31,14 @@ const vehicles = (state = vehiclesState, action) => {
                 }])
             }
         }
+        case VehiclesActions.EDIT_VEHICLE : {
+            return {
+                ...state,
+                vehicles: state.vehicles.set(state.vehicles.findIndex((vehicle) => {
+                    return vehicle.id === action.payload.id;
+                }), action.payload.vehicle)
+            }
+        }
         case VehiclesActions.DELETE_VEHICLE : {
             return {
                 ...state,
