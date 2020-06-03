@@ -18,6 +18,7 @@ const SearchView = ({
                     search
                         .map(e => (
                             <List.Item
+                                key={e.title}
                                 onClick={e.action.bind(this, props)} 
                                 theme={BSTheme.SECONDARY}
                                 icon={
@@ -26,7 +27,7 @@ const SearchView = ({
                                 title={<FormattedMessage id={e.title} />}
                                 subtitle={<FormattedMessage id={e.description} />}
                                 actions={[
-                                    <Icon name={e.icon} size="arrow right"/>
+                                    <Icon name="arrow right"/>
                                 ]}
                             />
                         ))}

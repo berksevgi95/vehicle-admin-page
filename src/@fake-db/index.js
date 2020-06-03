@@ -166,6 +166,33 @@ export const Vehicles = [{
     }]
 }]
 
+export const Accidents = [{
+    id: 1,
+    vehicle1: Vehicles[0],
+    vehicle2: {
+        id: 2,
+        plateNumber: '06 TY 879',
+        img: 'https://www.motortrend.com/uploads/sites/10/2017/09/2018-toyota-prius-c-one-hatchback-angular-front.png',
+        brand: 'Toyota',
+        modelName: 'Prius C',
+        modelType: '1.5',
+        year: 2020,
+        km: 10000,
+    },
+    description: 'Lorem ipsum dolor sit amet',
+    date: new Date(),
+    time: new Date().getTime(),
+    files: []
+}, {
+    id: 2,
+    vehicle1: Vehicles[2],
+    vehicle2: Vehicles[1],
+    description: 'Lorem ipsum dolor sit amet',
+    date: new Date(),
+    time: new Date().getTime(),
+    files: []
+}]
+
 export const Drivers = [{
     id : 1,
     name : 'berk'

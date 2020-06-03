@@ -58,11 +58,18 @@ const Header = ({
                     )
                 )}
             </div>
-            <Input className="hidden sm:block" onChange={handleNavigateSearch} placeholder="Search" />
+            <Input
+                className="hidden sm:block"
+                onChange={handleNavigateSearch}
+                placeholder="Search"
+            />
         </header>
     ) : (
         <header className={classNames(classes.header, "justify-end")}>
-            <Input onChange={handleNavigateSearch} placeholder="Search"/>
+            <Input
+                onChange={handleNavigateSearch}
+                placeholder="Search"
+            />
         </header>
     )
 }

@@ -37,6 +37,7 @@ const styles = {
     },
 
     link: {
+        display: 'flex',
         transition: '.3s',
         width: '100%',
         padding: '1rem',
@@ -114,16 +115,19 @@ const Sidebar = ({
                 {routes &&
                     routes.length > 0 &&
                     routes.map(route => route.icon && (
-                        <div onClick={toggleSidebar(true)} key={route.id} className={classes.link}>
-                            <Link className="flex" to={route.path}>
-                                <div className="mr-2 text-white">
-                                    {route.icon}
-                                </div>
-                                <span className="truncate text-white">
-                                    <FormattedMessage id={route.title} />
-                                </span>
-                            </Link>
-                        </div>
+                        <Link
+                            onClick={toggleSidebar(true)}
+                            key={route.id}
+                            className={classes.link}
+                            to={route.path}
+                        >
+                            <div className="mr-2 text-white">
+                                {route.icon}
+                            </div>
+                            <span className="truncate text-white">
+                                <FormattedMessage id={route.title} />
+                            </span>
+                        </Link>
                     )
                 )}
             </div>

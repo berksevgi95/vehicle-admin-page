@@ -32,6 +32,19 @@ const tr = {
   "vehicles.fuelType": 'Yakıt Tipi',
   "vehicles.fuelType.gasoline": 'Benzin',
   "vehicles.fuelType.diesel": 'Dizel',
+
+  "accidents": "Kazalar",
+  "accidents.description": "Açıklama",
+  "accidents.plates": "Kazaya karışan araç plakaları",
+  "accidents.date": "Tarih",
+  "accidents.time": "Zaman",
+  "accidents.add" : 'Kaza Ekle',
+  "accidents.delete.success" : 'Kaza başarıyla silindi',
+  "accidents.filter": 'Kaza Filtreleme',
+  "accidents.list.description" : 'Sistemdeki tüm kazaları listele',
+  "accidents.add.description" : 'Yeni kaza tanımla',
+
+
 }
 
 const en = {
@@ -68,6 +81,19 @@ const en = {
   "vehicles.fuelType": 'Fuel Type',
   "vehicles.fuelType.gasoline": 'Gasoline',
   "vehicles.fuelType.diesel": 'Diesel',
+
+  "accidents": "Accidents",
+  "accidents.description": "Description",
+  "accidents.plates": "Plates involved in the accident",
+  "accidents.date": "Date",
+  "accidents.time": "Time",
+  "accidents.add" : 'Add Accident',
+  "accidents.delete.success" : 'Accident successfully deleted',
+  "accidents.filter": 'Accident Filter',
+  "accidents.list.description" : 'List all accidents exist in system',
+  "accidents.add.description" : 'Define new accident',
+
+
 }
 
 export default {tr, en}
